@@ -24,7 +24,7 @@
 - **A full agent-behavior stack**: 22 skills, 15 hooks, 8 rules, and 3 subagents that make the agent retrieve before acting, persist while working, and extract learnings after.
 - **A five-minute demo**: clone → open in Claude Code → ranked retrieval, knowledge-health metrics, and cross-domain synthesis over a seeded 53-note corpus, no external services required.
 
-<!-- screenshot slot: terminal capture of `hive_retrieve` ranked output with scores and a retrievalId -->
+<img src="docs/assets/demo-retrieve.png" alt="hive_retrieve over the demo corpus: three ranked notes with per-component score breakdowns, hybrid RRF mode, and a logged retrievalId — the top hit surfaces with zero keyword overlap" width="100%">
 
 ---
 
@@ -249,7 +249,7 @@ export HIVE_PATH="$HOME/my-hive"
 
 **Then try it on the demo corpus** (about five minutes): open the repo in Claude Code and ask for a retrieval — e.g. `hive_retrieve("how should tool calls handle retries safely")` — and you'll get ranked notes with scores and a `retrievalId`. Try `granularity: "chunk"` on the same query to get section-anchored hits. Run `/health` and you'll see the knowledge-health readout computed over the corpus, with escape velocity true. Run `/connect` to watch it generate cross-domain synthesis notes into `30-resources/synthesis/` — that folder ships empty on purpose.
 
-<!-- screenshot slot: `/health` knowledge-health readout over the demo corpus (escape velocity: true) -->
+<img src="docs/assets/demo-health.png" alt="/health readout over the demo corpus: status COMPOUNDING, K=68, sigma 1.0, rho 0.741, delta 0.279 — sigma times rho exceeds delta over 100, so escape velocity is true" width="100%">
 
 The server runs **filesystem-first** — no external services required, and the MemRL learning loop stays live in pure-filesystem mode. To enable live two-way sync with Obsidian, install the [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) plugin and set `OBSIDIAN_API_KEY` (or store it in the OS keyring under service `hivemind`). To enable the semantic embedding backend:
 
