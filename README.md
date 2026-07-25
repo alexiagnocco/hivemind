@@ -5,7 +5,7 @@
 <p><em>One shared network linking every note, every decision, every session into a single superorganism.<br>Turn an AI coding agent's transient context into a durable, self-improving knowledge base.</em></p>
 
 [![CI](https://github.com/alexiagnocco/hivemind/actions/workflows/ci.yml/badge.svg)](https://github.com/alexiagnocco/hivemind/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-e50914.svg?style=flat-square)](LICENSE)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/license-PolyForm_Noncommercial-e50914.svg?style=flat-square)](LICENSE)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-e50914.svg?style=flat-square&logo=python&logoColor=white)
 ![FastMCP](https://img.shields.io/badge/MCP-FastMCP-b00610.svg?style=flat-square)
 ![MCP tools: 23](https://img.shields.io/badge/MCP_tools-23_full_·_8_lean-e50914.svg?style=flat-square)
@@ -14,6 +14,17 @@
 **[Enter the hive — read the documentation site&nbsp;→](https://alexiagnocco.github.io/hivemind/)**
 
 </div>
+
+---
+
+## What you get in 60 seconds
+
+- **A working memory layer for an AI coding agent** — a Python/FastMCP MCP server (23 tools, 207 tests) that any MCP client can load.
+- **Retrieval that learns**: keyword + dense-vector fusion (Reciprocal Rank Fusion), re-ranked by a reinforcement-learning utility signal that rewards the notes actually *cited* in later work.
+- **A full agent-behavior stack**: 22 skills, 15 hooks, 8 rules, and 3 subagents that make the agent retrieve before acting, persist while working, and extract learnings after.
+- **A five-minute demo**: clone → open in Claude Code → ranked retrieval, knowledge-health metrics, and cross-domain synthesis over a seeded 53-note corpus, no external services required.
+
+<!-- screenshot slot: terminal capture of `hive_retrieve` ranked output with scores and a retrievalId -->
 
 ---
 
@@ -238,6 +249,8 @@ export HIVE_PATH="$HOME/my-hive"
 
 **Then try it on the demo corpus** (about five minutes): open the repo in Claude Code and ask for a retrieval — e.g. `hive_retrieve("how should tool calls handle retries safely")` — and you'll get ranked notes with scores and a `retrievalId`. Try `granularity: "chunk"` on the same query to get section-anchored hits. Run `/health` and you'll see the knowledge-health readout computed over the corpus, with escape velocity true. Run `/connect` to watch it generate cross-domain synthesis notes into `30-resources/synthesis/` — that folder ships empty on purpose.
 
+<!-- screenshot slot: `/health` knowledge-health readout over the demo corpus (escape velocity: true) -->
+
 The server runs **filesystem-first** — no external services required, and the MemRL learning loop stays live in pure-filesystem mode. To enable live two-way sync with Obsidian, install the [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) plugin and set `OBSIDIAN_API_KEY` (or store it in the OS keyring under service `hivemind`). To enable the semantic embedding backend:
 
 ```bash
@@ -311,4 +324,8 @@ Full attribution and the complete reference list: [CREDITS.md](CREDITS.md).
 
 ## License
 
-[MIT](LICENSE).
+[PolyForm Noncommercial 1.0.0](LICENSE) — source-available. You are welcome to read, run, study, and adapt hivemind for any noncommercial purpose: personal use, research, education, and evaluation. **Commercial use requires written permission from the author.**
+
+> Required Notice: Copyright (c) 2026 Alex Iagnocco (https://github.com/alexiagnocco)
+
+Repository snapshots published before 2026-07-25 carried the MIT license; from this date forward the project is licensed PolyForm Noncommercial 1.0.0.
