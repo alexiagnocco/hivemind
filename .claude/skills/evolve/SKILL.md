@@ -97,7 +97,7 @@ Append a "Lessons Application Audit" section to the evolution proposals:
    - Source: [memory/feedback_foo.md | retro-X.md]
    - Why this target: [rule > skill > CLAUDE.md reasoning]
 
-**Promotion candidates** (patterns surfacing 2+ times — consider promoting memory → rule):
+**Elevation candidates** (patterns surfacing 2+ times — consider elevating memory → rule):
 - [pattern] appears in [sources] → propose new rule or extend existing rule in `.claude/rules/`
 
 **Aged-accepted debt** (proposals marked accepted >14d ago with no follow-through):
@@ -113,7 +113,7 @@ For each recommended change, write a proposal with:
 ```markdown
 ### Proposal: [Short Title]
 
-**Type**: [New MOC | Folder restructure | Schema change | Tag cleanup | Archive sweep | Rule update | Skill update | CLAUDE.md update | MCP tool update | Hook update | Lesson promotion]
+**Type**: [New MOC | Folder restructure | Schema change | Tag cleanup | Archive sweep | Rule update | Skill update | CLAUDE.md update | MCP tool update | Hook update | Lesson elevation]
 **Impact**: [High | Medium | Low]
 **Effort**: [Minutes | Hours]
 **Source** (for lesson-propagation proposals): [memory/feedback file | retro file | accepted proposal]

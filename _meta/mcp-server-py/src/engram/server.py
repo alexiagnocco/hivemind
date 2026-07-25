@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from collections.abc import AsyncIterator
 from fastmcp.server.lifespan import lifespan
 
+from engram import __version__
 from engram.backend.dispatcher import Dispatcher
 from engram.config import Settings
 from engram.rest.client import ObsidianRestClient
@@ -92,7 +93,7 @@ async def app_lifespan(server: FastMCP) -> AsyncIterator[dict[str, Any]]:
         await monitor.stop()
 
 
-mcp = FastMCP("engram", lifespan=app_lifespan)
+mcp = FastMCP("engram", version=__version__, lifespan=app_lifespan)
 
 
 # ---------------------------------------------------------------------------

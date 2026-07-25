@@ -117,7 +117,9 @@ def _walk_md_files(directory: Path, root: Path) -> list[Path]:
     except OSError:
         return results
     for entry in entries:
-        if entry.name in EXCLUDE_DIRS:
+        # Skip every dot-entry, not just the enumerated caches — .venv,
+        # .pytest_cache, and future tool dirs all ship stray markdown.
+        if entry.name in EXCLUDE_DIRS or entry.name.startswith("."):
             continue
         if entry.is_dir():
             results.extend(_walk_md_files(entry, root))

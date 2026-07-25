@@ -80,7 +80,7 @@
       <ul class="stat-strip reveal" style="--d:6">
         <li><b>23</b><span>MCP tools</span></li>
         <li><b>21</b><span>skills</span></li>
-        <li><b>14</b><span>hooks</span></li>
+        <li><b>15</b><span>hooks</span></li>
         <li><b>8</b><span>rules</span></li>
         <li><b>68</b><span>tests</span></li>
       </ul>
@@ -177,7 +177,7 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
     <div class="stack reveal">
       <div class="stack-row layers">
         <div class="layer"><b>Skills</b><span>21 · slash-command workflows</span></div>
-        <div class="layer"><b>Hooks</b><span>14 · deterministic automation</span></div>
+        <div class="layer"><b>Hooks</b><span>15 · deterministic automation</span></div>
         <div class="layer"><b>Rules</b><span>8 · always-on conventions</span></div>
         <div class="layer"><b>Agents</b><span>2 · context-isolated subagents</span></div>
       </div>
@@ -290,7 +290,7 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
       <button class="copy" type="button" aria-label="Copy code">copy</button>
       <pre><code>cd _meta/mcp-server-py
 uv sync --extra dev
-uv run pytest -q          # 62 tests (71 with the optional ONNX extra)
+uv run pytest -q          # 64 tests (73 with the optional ONNX extra)
 
 # point engram at a vault (defaults to ~/vault)
 export VAULT_PATH="$(git rev-parse --show-toplevel)"</code></pre>

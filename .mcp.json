@@ -2,10 +2,7 @@
   "mcpServers": {
     "engram": {
       "command": "bash",
-      "args": ["_meta/mcp-server-py/scripts/launch.sh"],
-      "env": {
-        "VAULT_PATH": "${PWD}"
-      }
+      "args": ["_meta/mcp-server-py/scripts/launch.sh"]
     }
   }
 }
