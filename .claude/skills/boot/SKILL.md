@@ -5,7 +5,7 @@ description: "Session startup: get date, load context, check health, and surface
 
 # /boot — Session Startup
 
-Boot the session with full vault awareness. This is the `/recall` + `/health` context-load combo that should run at the start of every substantive session. The counterpart to `/wrap` at session end.
+Boot the session with full hive awareness. This is the `/recall` + `/health` context-load combo that should run at the start of every substantive session. The counterpart to `/wrap` at session end.
 
 ## Usage
 
@@ -23,7 +23,7 @@ Run `date "+%A, %Y-%m-%d %I:%M %p"` and store the result. This anchors all time-
 
 ### Phase 2: Health Pulse
 
-Call `vault_health` (window_days=7, stale_threshold_days=30). Display a single-line summary:
+Call `hive_health` (window_days=7, stale_threshold_days=30). Display a single-line summary:
 
 ```
 Health: COMPOUNDING | K=217 | sigma=0.77 | rho=0.33 | delta=0.0
@@ -38,7 +38,7 @@ Determine the project:
 2. If `<topic>` provided, use it as a search query.
 3. Otherwise derive from `pwd`: `basename "$(pwd)"` maps to `memory/projects/<project>.md`.
 
-Call `vault_context` with the project/query. Display:
+Call `hive_context` with the project/query. Display:
 - **Last session**: What was done, what's pending (from project memory handoff)
 - **Open questions**: Any unresolved items
 - **Next action**: The "Next Session Start" item from the last `/handoff`
@@ -47,7 +47,7 @@ If no project memory exists, say so and move on.
 
 ### Phase 4: Recall
 
-Call `vault_retrieve` with the topic/project context. Show top 5 results (not 10 — this is a quick boot, not deep research):
+Call `hive_retrieve` with the topic/project context. Show top 5 results (not 10 — this is a quick boot, not deep research):
 
 ```
 ## Relevant Knowledge (5)
@@ -55,7 +55,7 @@ Call `vault_retrieve` with the topic/project context. Show top 5 results (not 10
 - ...
 ```
 
-Call `vault_related` on the top 1-2 results to surface link-graph neighbors. Add any novel neighbors to the list.
+Call `hive_related` on the top 1-2 results to surface link-graph neighbors. Add any novel neighbors to the list.
 
 Track the `retrievalId` for later `/feedback`.
 
@@ -90,6 +90,6 @@ End session with /wrap
 - **40% context rule** — load only what's relevant. Don't stuff context with everything.
 - **One nudge max** — follow the nudge priority system.
 - **Track retrievalId** — essential for `/feedback` at session end (or during `/wrap`).
-- **If engram MCP is unavailable**, fall back to direct file reads: `memory/projects/`, `30-resources/`, `_meta/vault-manifest.json`.
-- **If this is a fresh vault with no project memory**, say so honestly and suggest what to work on based on inbox and recent activity.
+- **If hivemind MCP is unavailable**, fall back to direct file reads: `memory/projects/`, `30-resources/`, `_meta/hive-manifest.json`.
+- **If this is a fresh hive with no project memory**, say so honestly and suggest what to work on based on inbox and recent activity.
 - **Keep total output under 40 lines** — this is a boot screen, not a report.

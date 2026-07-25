@@ -2,9 +2,9 @@
 
 ## Conceptual foundation
 
-engram's **knowledge-compounding model** is adapted from **AgentOps — "The Science"** by
+hivemind's **knowledge-compounding model** is adapted from **AgentOps — "The Science"** by
 [`boshu2`](https://github.com/boshu2/agentops) (Apache-2.0). That work is where this project's
-core thesis comes from. Specifically, the following are AgentOps' ideas, not engram's:
+core thesis comes from. Specifically, the following are AgentOps' ideas, not hivemind's:
 
 - the knowledge-dynamics equation **`dK/dt = I(t) − δ·K + σ·ρ·K`**;
 - the **escape-velocity** condition **`σ·ρ > δ/100`** (knowledge compounds when retrieval outruns decay);
@@ -13,7 +13,7 @@ core thesis comes from. Specifically, the following are AgentOps' ideas, not eng
 - the **40% context rule** (load only what's relevant; performance peaks well below full context);
 - the validation-**ratchet** metaphor (gates make progress one-way).
 
-**engram is an independent implementation of these ideas — it contains no AgentOps code.** It is a
+**hivemind is an independent implementation of these ideas — it contains no AgentOps code.** It is a
 from-scratch Python/FastMCP server and Claude Code customization stack that operationalizes the model
 above. Credit for the *model* belongs to AgentOps.
 
@@ -22,14 +22,14 @@ above. Credit for the *model* belongs to AgentOps.
 
 ### A note on one reframing
 
-engram presents **ρ as retrieval *precision*** — how *useful* the notes it surfaces turn out to be.
+hivemind presents **ρ as retrieval *precision*** — how *useful* the notes it surfaces turn out to be.
 AgentOps defines ρ more precisely as the **decision-influence / citation rate** (the fraction of
-surfaced artifacts later used or cited). engram's framing is a simplification for a developer
+surfaced artifacts later used or cited). hivemind's framing is a simplification for a developer
 audience; the underlying quantity is the same signal.
 
 ## Foundational research (as synthesized by AgentOps)
 
-AgentOps' model rests on prior academic work. engram leans on the following directly; full citations
+AgentOps' model rests on prior academic work. hivemind leans on the following directly; full citations
 and the complete bibliography live in AgentOps' "The Science" page.
 
 - **Ebbinghaus, H. (1885).** *Memory: A Contribution to Experimental Psychology.* — the forgetting
@@ -42,7 +42,7 @@ and the complete bibliography live in AgentOps' "The Science" page.
   (TACL 2023). — long-context utilization degrades in the middle; the empirical backing for the **40% context rule**.
 - **"MemRL: Self-Evolving Agents via Runtime Reinforcement Learning on Episodic Memory" (2026).**
   arXiv:[2601.03192](https://arxiv.org/abs/2601.03192). — two-phase retrieval that filters candidates by
-  semantic relevance and then selects by learned utility (Q-values). engram's **fusion → MemRL re-rank**
+  semantic relevance and then selects by learned utility (Q-values). hivemind's **fusion → MemRL re-rank**
   pipeline mirrors this structure.
 
 AgentOps' "The Science" also draws on Miller (1956) and Cowan (2001) on working-memory capacity,
@@ -51,6 +51,6 @@ Handbook*, and Meadows (2008) *Thinking in Systems*. See its bibliography for th
 
 ## License note
 
-AgentOps is licensed Apache-2.0. Because engram includes **none of its code**, this file is an
-acknowledgement of intellectual inspiration rather than a code-license (NOTICE) obligation. engram
+AgentOps is licensed Apache-2.0. Because hivemind includes **none of its code**, this file is an
+acknowledgement of intellectual inspiration rather than a code-license (NOTICE) obligation. hivemind
 itself is released under the [MIT License](LICENSE).

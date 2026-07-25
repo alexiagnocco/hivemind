@@ -4,12 +4,12 @@ description: "Capture learnings and retrospectives from development work"
 
 # /retro — Learning Capture
 
-Persist learnings to vault before they decay. Search before creating; append to existing notes when possible.
+Persist learnings to hive before they decay. Search before creating; append to existing notes when possible.
 
 ## Quick Mode: `/retro "insight"`
 
 1. Determine domain (backend, data, infra, devops, testing, retrieval, ai-ml, meta)
-2. `vault_search` for existing notes on topic — **append** if found
+2. `hive_search` for existing notes on topic — **append** if found
 3. If new note: create at `30-resources/<domain>/<slug>.md` with frontmatter (created, updated, tags, status: active, type: reference, domain), `parent:` linking to MOC, sections: Context, The Learning, Related
 4. If appending: add dated section, update `updated:` field, add new [[wikilinks]]
 

@@ -19,7 +19,7 @@ The model reads your schema the way a developer reads API docs — except it rea
 
 Every tool description should answer four questions in order: what it does, when to use it, when *not* to use it, and what comes back. The "when not" clause is the one everyone omits and the one that prevents the most misrouting — two tools with adjacent purposes need their boundary drawn in prose, in both descriptions.
 
-Parameter descriptions carry the same weight. `path: the path` is a wasted slot; `path: vault-relative path to the note, e.g. 30-resources/backend/retry-patterns.md` eliminates a whole class of malformed calls. Examples in descriptions are cheap and models imitate them.
+Parameter descriptions carry the same weight. `path: the path` is a wasted slot; `path: hive-relative path to the note, e.g. 30-resources/backend/retry-patterns.md` eliminates a whole class of malformed calls. Examples in descriptions are cheap and models imitate them.
 
 ## Enums beat free strings
 

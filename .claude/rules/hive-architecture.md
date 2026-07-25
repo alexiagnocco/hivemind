@@ -1,39 +1,66 @@
----
-description: Vault folder structure, naming conventions, and linking rules
-globs: "**/*.md"
----
-
-# Vault Architecture Conventions
+# Hive Architecture Conventions
 
 ## Folder Structure
 
 ```
-vault/
-├── 00-inbox/           # Unprocessed captures → triage into the PARA folders
-├── 10-projects/        # Active PARA projects (status: active)
-├── 20-areas/           # Ongoing areas of responsibility
+hive/
+├── 00-inbox/           # Unprocessed captures → triage into the PARA folders (stays FLAT)
+├── 10-projects/        # Active PARA projects — ONE SUBDIR PER PROJECT SLUG
+│   └── <project-slug>/ # All of a project's notes, ADRs, meeting notes
+├── 20-areas/           # Ongoing areas of responsibility — one subdir per area
 │   ├── reliability/
 │   ├── code-review/
 │   └── on-call/
-├── 30-resources/       # Reference material, guides, how-tos
+├── 30-resources/       # Reference material — one subdir per domain (tag vocabulary)
 │   ├── agent-sdk/
 │   ├── mcp-gateway/
 │   ├── evals-observability/
 │   ├── reliability-guardrails/
 │   └── synthesis/      # Cross-domain pattern notes from /connect
-├── 40-archive/         # Completed/deprecated (status: archived)
-├── 50-maps/            # Maps of Content (MOCs) by domain
+├── 40-archive/         # Completed/deprecated (status: archived) — MIRRORS SOURCE PATHS
+│   └── <original-path> # e.g. 40-archive/10-projects/<slug>/, 40-archive/30-resources/agent-sdk/x.md
+├── 50-maps/            # Maps of Content (MOCs) by domain (stays FLAT)
 ├── memory/             # Deep memory (glossary, people, context, projects)
 │   ├── context/
 │   ├── people/         # Contact / stakeholder profiles — keep private
-│   ├── projects/
+│   ├── projects/       # <project>.md — MUST STAY FLAT (exact-path mapping in the MCP server)
 │   └── glossary.md
-└── _meta/              # System files — vault health, logs, reviews
+└── _meta/              # System files — hive health, logs, reviews
     ├── reviews/        # Weekly reviews, connection scans
     ├── reports/        # Scheduled outputs
     ├── automation/     # Scheduled task configs
     └── inbox/          # Daily triage logs (auto-generated)
 ```
+
+Every folder carries a `_README.md` landing page (`type: readme`, a system
+note — never counted as content) stating what belongs there and what
+doesn't. Read it before filing into an unfamiliar folder.
+
+## Placement Rules
+
+| Creating… | Destination |
+|---|---|
+| Project note / ADR / meeting note | `10-projects/<project-slug>/` |
+| Area working note | `20-areas/<area>/` |
+| Reusable pattern / technique | `30-resources/<domain>/` (domain = tag vocabulary) |
+| Cross-domain insight | `30-resources/synthesis/` |
+| New MOC | `50-maps/` (flat) |
+| Raw capture, destination unclear | `00-inbox/` (flat; leaves at triage) |
+| Project memory / handoff | `memory/projects/<project>.md` (flat file, append) |
+
+- **Never encode mutable state in paths.** Status (`active`/`queued`/`done`)
+  lives in frontmatter; paths are identity for wikilinks and the embedding
+  store, so a note moves at most twice in its life: out of `00-inbox/`, and
+  into `40-archive/`. No `active/`, `queued/`, `completed/` directories —
+  status views come from Dataview dashboards ([[50-maps/MOC-Projects|MOC-Projects]]).
+  Rationale: subdirectories are only ever created for *stable* dimensions
+  (a project, an area, a domain) — anything mutable in a path forces
+  link-breaking moves and re-embedding every time state changes.
+- **Archive by mirroring**: `40-archive/<original-path>` — provenance
+  survives and un-archiving is a mechanical reverse move.
+- **New subdirectory?** Only when a stable dimension earns it (a new
+  project, area, or a domain with ≥3 notes) — create it with a `_README.md`
+  landing page in the same change.
 
 ## Naming Conventions
 
@@ -79,13 +106,13 @@ The Dataview Serializer plugin writes query results as static markdown between H
 **Staleness caveat:**
 - Serialized results are snapshots — they update only when the file is opened or modified in Obsidian
 - If a MOC hasn't been opened in Obsidian for 7+ days, serialized results may be stale
-- For real-time metadata queries during Claude Code sessions, prefer `vault_search` / `vault_recent`
+- For real-time metadata queries during Claude Code sessions, prefer `hive_search` / `hive_recent`
 
 **Decision tree — which tool to use:**
 
 | Need | Tool | Requires Obsidian? |
 |------|------|-------------------|
-| Filter notes by metadata | engram (`vault_search`) | No |
+| Filter notes by metadata | hivemind (`hive_search`) | No |
 | Live dynamic tables in Obsidian | Dataview code blocks | Yes |
 | Claude Code reads query results | Serialized query markers | Obsidian must have run recently |
 | Complex aggregations | DataviewJS blocks | Yes |

@@ -13,7 +13,7 @@ Capture session state so the next session starts at Week 1, not Week 0.
 ## Behavior
 
 1. Review session work: files changed, decisions made, open questions
-2. Identify project (ask if unclear; default to `memory/context/vault-handoff.md`)
+2. Identify project (ask if unclear; default to `memory/context/hive-handoff.md`)
 3. **Append** to `memory/projects/<project>.md`:
 
 ```markdown
@@ -32,9 +32,9 @@ Capture session state so the next session starts at Week 1, not Week 0.
 ```
 
 4. **MemRL Feedback** — Before writing the handoff:
-   - Identify notes retrieved via `/recall` or `vault_retrieve` this session
+   - Identify notes retrieved via `/recall` or `hive_retrieve` this session
    - Classify each: cited/referenced in created/edited files = helpful, surfaced but unused = not helpful
-   - Call `vault_feedback` with the classified paths
+   - Call `hive_feedback` with the classified paths
    - Report: "Recorded feedback for N notes (M helpful, K not helpful)"
 5. Update `updated:` on project memory file
 6. Verify new notes have inbound links

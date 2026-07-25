@@ -278,7 +278,7 @@ def build_manifest() -> dict:
         "vault_path": str(vault).replace("\\", "/"),
         "note_count": total_notes,
         "stats": stats,
-        # Legacy flat array (used by existing vault_search, vault_recent, etc.)
+        # Legacy flat array (used by existing hive_search, hive_recent, etc.)
         "notes": notes_array,
         # Rich indexes
         "noteIndex": dict(notes),

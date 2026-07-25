@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# SessionStart: self-provision the engram platform so a fresh session — local
+# SessionStart: self-provision the hivemind platform so a fresh session — local
 # clone or Claude Code on the web — boots green with zero manual setup.
 #
 #   1. uv sync (dev + embeddings extras; falls back to dev-only)
-#   2. build the vault manifest (server-native builder, no extra deps)
+#   2. build the hive manifest (server-native builder, no extra deps)
 #   3. best-effort fetch of embedding weights (hashing fallback otherwise)
 #   4. stdio smoke test via scripts/stdio-smoke.py — an interactive client
 #      that holds stdin open until responses land; stdio servers cancel
@@ -25,9 +25,9 @@ ROOT="${CLAUDE_PROJECT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
 SERVER_DIR="$ROOT/_meta/mcp-server-py"
 MODEL_DIR="$SERVER_DIR/models/all-MiniLM-L6-v2"
 unset VIRTUAL_ENV
-export VAULT_PATH="${VAULT_PATH:-$ROOT}"
+export HIVE_PATH="${HIVE_PATH:-$ROOT}"
 
-say() { printf 'engram provision: %s\n' "$1"; }
+say() { printf 'hivemind provision: %s\n' "$1"; }
 
 if ! command -v uv >/dev/null 2>&1; then
     say "SKIPPED — uv not found; install https://docs.astral.sh/uv/ then run: bash $ROOT/.claude/hooks/session-provision.sh"
@@ -46,25 +46,25 @@ else
     exit 0
 fi
 
-# 2. Vault manifest (retrieval is empty without it on a fresh clone)
+# 2. Hive manifest (retrieval is empty without it on a fresh clone)
 if MANIFEST_OUT="$(cd "$SERVER_DIR" && uv run python -c "
 import os
 from pathlib import Path
-from engram.manifest.builder import build_and_write_manifest
-print(build_and_write_manifest(Path(os.environ['VAULT_PATH'])))
+from hivemind.manifest.builder import build_and_write_manifest
+print(build_and_write_manifest(Path(os.environ['HIVE_PATH'])))
 " 2>&1)"; then
     # First line reads: "Manifest built: N notes -> <path>"
     MANIFEST="$(printf '%s\n' "$MANIFEST_OUT" | head -1 | sed 's/ ->.*//')"
 else
-    say "manifest build FAILED: $(printf '%s\n' "$MANIFEST_OUT" | tail -1) — retry via the vault_rebuild MCP tool once the server is up"
+    say "manifest build FAILED: $(printf '%s\n' "$MANIFEST_OUT" | tail -1) — retry via the hive_rebuild MCP tool once the server is up"
     MANIFEST="manifest missing"
 fi
 
 # 3. Embedding weights (never committed; fetched on demand)
 if [ -f "$MODEL_DIR/model.onnx" ]; then
     WEIGHTS="weights present"
-elif [ "${ENGRAM_SKIP_WEIGHTS_FETCH:-0}" = "1" ]; then
-    WEIGHTS="weights fetch skipped (ENGRAM_SKIP_WEIGHTS_FETCH=1); hashing fallback"
+elif [ "${HIVEMIND_SKIP_WEIGHTS_FETCH:-0}" = "1" ]; then
+    WEIGHTS="weights fetch skipped (HIVEMIND_SKIP_WEIGHTS_FETCH=1); hashing fallback"
 elif [ "$EMBEDDINGS_SYNCED" = "0" ]; then
     WEIGHTS="hashing fallback (no onnxruntime)"
 else
@@ -72,7 +72,7 @@ else
             python scripts/fetch-embedding-model.py >/dev/null 2>&1); then
         WEIGHTS="weights fetched (MiniLM ONNX)"
     else
-        WEIGHTS="weights unavailable (network policy?); hashing fallback — vault_status reports the active backend"
+        WEIGHTS="weights unavailable (network policy?); hashing fallback — hive_status reports the active backend"
     fi
 fi
 

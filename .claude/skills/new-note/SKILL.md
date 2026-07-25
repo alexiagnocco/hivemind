@@ -1,12 +1,12 @@
 ---
 name: new-note
-description: Create a new note with proper frontmatter, naming, and linking. Use when starting a new note to ensure it follows vault conventions from the start.
+description: Create a new note with proper frontmatter, naming, and linking. Use when starting a new note to ensure it follows hive conventions from the start.
 allowed-tools: Read, Write, Glob, Grep
 ---
 
 # New Note
 
-Create a new note following vault conventions. Accepts a topic and optional type as arguments.
+Create a new note following hive conventions. Accepts a topic and optional type as arguments.
 
 ## Domain
 
@@ -24,11 +24,12 @@ Infer from the arguments or ask:
 
 | Signal | Type | Destination |
 |--------|------|-------------|
-| "meeting" keyword or attendee names | meeting | `10-projects/` or `20-areas/` |
-| "decision" or "ADR" keyword | decision | relevant project folder |
-| Technical topic | note | `30-resources/` subfolder |
-| Project-specific content | note | `10-projects/` subfolder |
-| Ongoing area of responsibility | note | `20-areas/` subfolder |
+| "meeting" keyword or attendee names | meeting | `10-projects/<project-slug>/` or `20-areas/<area>/` |
+| "decision" or "ADR" keyword | decision | `10-projects/<project-slug>/` |
+| Technical topic | note | `30-resources/<domain>/` (domain = tag vocabulary) |
+| Cross-domain insight | note | `30-resources/synthesis/` |
+| Project-specific content | note | `10-projects/<project-slug>/` |
+| Ongoing area of responsibility | note | `20-areas/<area>/` |
 
 ## Step 2: Generate Filename
 
@@ -64,7 +65,7 @@ Add minimal structure based on type:
 
 ## Step 6: Update Manifest
 
-Run `python _meta/scripts/build-manifest.py` to update the vault index with the new note.
+Run `python _meta/scripts/build-manifest.py` to update the hive index with the new note.
 
 ## Output
 

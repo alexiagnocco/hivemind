@@ -1,18 +1,18 @@
 ---
 name: evolve
-description: Propose structural improvements to the vault AND propagate captured learnings (memory/feedback, retros) into operational surfaces (skills, rules, CLAUDE.md, MCP tools, hooks). Use when the vault feels cluttered, when proactive architecture recommendations are wanted, or when lessons captured in memory/ haven't yet changed how Claude behaves.
+description: Propose structural improvements to the hive AND propagate captured learnings (memory/feedback, retros) into operational surfaces (skills, rules, CLAUDE.md, MCP tools, hooks). Use when the hive feels cluttered, when proactive architecture recommendations are wanted, or when lessons captured in memory/ haven't yet changed how Claude behaves.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(find *), Bash(wc *), Bash(sort *), Bash(python3 *), Bash(stat *)
 ---
 
-# Vault Evolution
+# Hive Evolution
 
 > **Recommended mode: Plan.** This is the most reasoning-intensive skill — pattern detection, drift analysis, and structural proposals all benefit from extended thinking. Switch with `Shift+Tab` if you're not in plan mode.
 
-Analyze the vault's current state and propose structural improvements. This is the self-evolving core of the second brain.
+Analyze the hive's current state and propose structural improvements. This is the self-evolving core of the second brain.
 
 ## Step 1: Pattern Detection
 
-Use `vault_manifest()` to load the full vault index. Analyze manifest metadata for structural signals — this replaces manual file scanning:
+Use `hive_manifest()` to load the full hive index. Analyze manifest metadata for structural signals — this replaces manual file scanning:
 
 - **Cluster detection**: Find groups of 5+ notes sharing common tags or frequent cross-links that don't yet have a MOC. (Analyze manifest `tags` and `links` fields.)
 - **Overgrown folders**: Folders with >20 direct children that should be subdivided. (Group manifest `path` by parent directory.)
@@ -22,7 +22,7 @@ Use `vault_manifest()` to load the full vault index. Analyze manifest metadata f
 
 ## Step 2: Schema Evolution
 
-Check if the frontmatter schema is serving the vault well:
+Check if the frontmatter schema is serving the hive well:
 
 - Are there fields being consistently left blank? (maybe remove or make optional)
 - Are there patterns in content that suggest a new field is needed?
@@ -39,7 +39,7 @@ Evaluate whether the hybrid PARA + Zettelkasten + MOC approach is working:
 
 ## Step 4: Lessons Application Audit
 
-The vault captures learnings in five substrates. This step checks whether those learnings are actually reflected in the operational surfaces that govern Claude's behavior — and proposes specific patches where they aren't. Without this loop, lessons decay in memory files without ever changing how Claude works.
+The hive captures learnings in five substrates. This step checks whether those learnings are actually reflected in the operational surfaces that govern Claude's behavior — and proposes specific patches where they aren't. Without this loop, lessons decay in memory files without ever changing how Claude works.
 
 ### Sources (the learning substrate)
 
@@ -56,9 +56,9 @@ The vault captures learnings in five substrates. This step checks whether those 
 |---|---|---|
 | Skills | `.claude/skills/` | `/recall`, `/handoff`, `/evolve`, etc. |
 | Modular rules | `.claude/rules/*.md` | Architecture, frontmatter, retrieval-order, nudge-system, subagent patterns |
-| Project instructions | `CLAUDE.md` | Top-level vault operating rules |
-| MCP tool descriptions | engram server definition | Tool-use prompts that govern when to invoke what |
-| Hooks | `.claude/hooks/` + `settings.json` | Automated behaviors (session-hygiene, lint) |
+| Project instructions | `CLAUDE.md` | Top-level hive operating rules |
+| MCP tool descriptions | hivemind server definition | Tool-use prompts that govern when to invoke what |
+| Hooks | `.claude/hooks/` + `settings.json` | Automated behaviors (stop-session-hygiene, lint) |
 
 ### Audit procedure
 
@@ -69,7 +69,7 @@ For each source entry (prioritize newest first), determine:
    - Hook (if the behavior can be enforced mechanically at a trigger point) →
    - Rule file (if it's a durable, cross-skill convention) →
    - Specific skill SKILL.md (if it only applies when that skill is invoked) →
-   - CLAUDE.md (only for vault-wide operating rules that don't fit elsewhere) →
+   - CLAUDE.md (only for hive-wide operating rules that don't fit elsewhere) →
    - MCP tool description (if it changes when a tool should be invoked)
 3. **Is it already reflected there?** Grep the target for the relevant keywords/phrases.
 4. **If not, draft a specific patch.** Include the target file path, the insertion point (which heading/section), and the exact text to add.
@@ -117,7 +117,7 @@ For each recommended change, write a proposal with:
 **Impact**: [High | Medium | Low]
 **Effort**: [Minutes | Hours]
 **Source** (for lesson-propagation proposals): [memory/feedback file | retro file | accepted proposal]
-**Rationale**: [Why this change, with evidence from the vault]
+**Rationale**: [Why this change, with evidence from the hive]
 **Action**: [Specific steps to implement — for operational-surface patches, include the target file path, insertion point, and exact text to add]
 ```
 
@@ -131,7 +131,7 @@ For each recommended change, write a proposal with:
 
 - Never execute changes without approval
 - Prefer small, incremental refactors over big-bang restructures
-- Every proposal must cite specific evidence from the vault (file names, counts, patterns, or source memory/retro path for lesson propagation)
-- If the vault is healthy and nothing needs changing, say so — don't invent busywork
+- Every proposal must cite specific evidence from the hive (file names, counts, patterns, or source memory/retro path for lesson propagation)
+- If the hive is healthy and nothing needs changing, say so — don't invent busywork
 - For lesson-propagation proposals: pick exactly ONE target surface (don't duplicate the same lesson across skills, rules, and CLAUDE.md)
 - Require 2+ independent sources before promoting a pattern from `memory/feedback_*.md` to a rule in `.claude/rules/` — one-off feedback stays in memory

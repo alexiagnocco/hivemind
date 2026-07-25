@@ -9,9 +9,9 @@ case "$ext" in
     python -m py_compile "$file" 2>&1
     ;;
   md)
-    # Frontmatter discipline for vault notes (files under the PARA folders)
+    # Frontmatter discipline for hive notes (files under the PARA folders)
     if echo "$file" | grep -qE '/(00-inbox|10-projects|20-areas|30-resources|40-archive|50-maps)/'; then
-      head -1 "$file" | grep -q '^---' || echo 'WARNING: Missing frontmatter in vault note'
+      head -1 "$file" | grep -q '^---' || echo 'WARNING: Missing frontmatter in hive note'
       grep -q "updated: $(date +%Y-%m-%d)" "$file" 2>/dev/null || echo "REMINDER: Bump updated: to today ($(date +%Y-%m-%d))"
     fi
     ;;

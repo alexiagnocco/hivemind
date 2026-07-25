@@ -70,7 +70,7 @@ configured (or an empty query) it falls back to the original keyword-only path.
 | Hashing (default fallback) | none | Deterministic SHA-1 feature hashing. Always available. **Lexical, not semantic.** |
 | ONNX | `embeddings` extra | Real sentence-transformer (e.g. all-MiniLM-L6-v2) via onnxruntime. **Semantic.** |
 
-Per-note vectors are cached incrementally in `_meta/vault-embeddings.json`
+Per-note vectors are cached incrementally in `_meta/hive-embeddings.json`
 (gitignored); only changed notes re-embed.
 
 ### Enabling the semantic (ONNX) backend

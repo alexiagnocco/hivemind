@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# PreToolUse (Bash): block deletion of active vault notes — archive them instead
+# PreToolUse (Bash): block deletion of active hive notes — archive them instead
 #
-# Vault notes carry backlinks, outlinks, and citation history; an outright `rm`
+# Hive notes carry backlinks, outlinks, and citation history; an outright `rm`
 # breaks the link graph and loses context that may still be retrieved through
-# MemRL / vault_retrieve. The archive-move discipline keeps the link target
+# MemRL / hive_retrieve. The archive-move discipline keeps the link target
 # resolvable (40-archive/ stays in the manifest) while marking the note inactive.
 #
 # Reads JSON on stdin (current Claude Code hook shape).
@@ -24,11 +24,11 @@ CMD=$(printf '%s' "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null)
 if printf '%s' "$CMD" | grep -qE '(^|[^a-zA-Z_])rm([[:space:]]|$).*/(00-inbox|10-projects|20-areas|30-resources|50-maps)/.*\.md' \
    && ! printf '%s' "$CMD" | grep -q '40-archive'; then
   cat <<'MSG' >&2
-BLOCKED: Never `rm` active vault notes — move them to 40-archive/ instead.
+BLOCKED: Never `rm` active hive notes — move them to 40-archive/ instead.
 
-Vault notes carry backlinks, outlinks, and citation history. A bare `rm`
+Hive notes carry backlinks, outlinks, and citation history. A bare `rm`
 breaks the link graph and loses context that may still be retrieved via
-vault_retrieve or MemRL scoring. Archiving preserves the link target.
+hive_retrieve or MemRL scoring. Archiving preserves the link target.
 
 Preferred:
   mv <note>.md 40-archive/<YYYY-MM-DD>-<note>.md

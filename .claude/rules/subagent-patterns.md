@@ -2,7 +2,7 @@
 
 ## When to Use Subagents
 
-- Parallel vault mining (3+ domains or project memories)
+- Parallel hive mining (3+ domains or project memories)
 - Rename/refactor safety audits (3+ files changing)
 - Cross-project pattern search (feature analogs)
 - Pre-commit multi-dimensional validation
@@ -16,9 +16,17 @@
 | Read-only audit | `Explore` | Can't accidentally modify during validation |
 | Pattern finding | `Explore` | Core purpose — codebase exploration |
 | Needs Bash execution | `general-purpose` | Explore lacks Bash tool |
+| LLM application work (RAG, agents, prompts, evals) | `ai-engineer` | Domain playbook preloaded; returns a structured decision record |
 | Needs file writes | **Don't delegate** | Keep writes in main thread |
 
 **Default to `Explore`** unless the task requires Bash or file modification.
+
+**Exception — `ai-engineer`:** multi-file LLM implementation, eval-harness
+builds, and retrieval-quality debugging delegate to the `ai-engineer` agent
+(`.claude/agents/ai-engineer.md`), which inherits all tools and may write files.
+Its paired skill (`.claude/skills/ai-engineer/`) defines when to delegate vs.
+stay inline; its output contract (decision record + changes + eval results +
+risks) keeps the main thread's context clean.
 
 ## Model Selection
 
@@ -31,7 +39,7 @@
 
 **Rules:**
 - When in doubt, use `opus` — quality matters more than speed for knowledge work
-- Never use `haiku` for subagents — insufficient reasoning for vault tasks
+- Never use `haiku` for subagents — insufficient reasoning for hive tasks
 - Parallel research agents: `opus` (they need to understand context and extract insights)
 - Pre-commit validators: `sonnet` (mechanical checks with clear pass/fail criteria)
 - Rename safety audits: `opus` (need judgment about what constitutes a stale reference)
@@ -54,7 +62,7 @@ Use `isolation: "worktree"` when an agent needs to experiment with file changes 
 
 Worktrees auto-clean if the agent makes no changes. If changes are made, the path and branch are returned for review.
 
-**Don't use worktrees for:** read-only research (Explore agents), validation checks, vault mining.
+**Don't use worktrees for:** read-only research (Explore agents), validation checks, hive mining.
 
 ## When NOT to Use Subagents
 
@@ -71,7 +79,7 @@ Worktrees auto-clean if the agent makes no changes. If changes are made, the pat
 
 ## Pattern: Parallel Research
 
-When a task requires knowledge from 3+ vault domains simultaneously:
+When a task requires knowledge from 3+ hive domains simultaneously:
 
 ```
 Explore Agent 1: Mine domain A (very thorough)
@@ -85,7 +93,7 @@ Main thread: Synthesize all findings → decide → persist
 When renaming/moving/rebranding 3+ files, spawn an Explore agent to run the 7-point checklist:
 1. Frontmatter `project:` slug references
 2. `status:` field for archived files
-3. Vault backups in `30-resources/` vs active skills
+3. Hive backups in `30-resources/` vs active skills
 4. `.claude/rules/`, `.claude/skills/`, CLAUDE.md stale references
 5. MOC tables with old names
 6. Hook scripts and settings.json dispatch references
@@ -100,7 +108,7 @@ When starting implementation, spawn an Explore agent to read all `memory/project
 
 ## Pattern: Pre-Commit Validation
 
-Before commits touching vault notes, spawn parallel Explore agents:
+Before commits touching hive notes, spawn parallel Explore agents:
 - Agent 1: Frontmatter validation (required fields, dates, tag vocab)
 - Agent 2: Wikilink integrity (no broken links, no new orphans)
 - Agent 3: Naming convention compliance
@@ -150,8 +158,8 @@ Agent prompts must include these elements (terse prompts produce shallow work):
 5. **Expected output format** — "report as a table", "under 200 words", "list of file paths with findings"
 6. **Length constraint** — unbounded prompts get unbounded (and often shallow) results
 
-**Bad prompt:** "Search the vault for patterns"
-**Good prompt:** "In /home/user/vault/memory/projects/, read all 13 .md files and extract any mentions of credential management patterns. I'm looking for reusable approaches across projects. Report as a table: project | pattern | outcome. Under 300 words."
+**Bad prompt:** "Search the hive for patterns"
+**Good prompt:** "In /home/user/hive/memory/projects/, read all 13 .md files and extract any mentions of credential management patterns. I'm looking for reusable approaches across projects. Report as a table: project | pattern | outcome. Under 300 words."
 
 ## Concurrency and Failure Handling
 

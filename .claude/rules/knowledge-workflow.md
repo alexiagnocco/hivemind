@@ -2,7 +2,7 @@
 
 ## Core Principle
 
-Every development session must increase the vault's knowledge stock `K` and maintain escape velocity: `sigma x rho > delta/100` — where **sigma** is retrieval coverage (how much of what you know you actually surface), **rho** is retrieval precision (how useful what you surface is), and **delta** is the decay rate (how fast unused knowledge goes stale). When `sigma·rho` exceeds `delta/100`, the knowledge base compounds faster than it decays. In practice this means: **retrieve before creating, persist during work, extract learnings after.** *(This model is adapted from [AgentOps · The Science](https://boshu2.github.io/agentops/the-science/); see CREDITS.md.)*
+Every development session must increase the hive's knowledge stock `K` and maintain escape velocity: `sigma x rho > delta/100` — where **sigma** is retrieval coverage (how much of what you know you actually surface), **rho** is retrieval precision (how useful what you surface is), and **delta** is the decay rate (how fast unused knowledge goes stale). When `sigma·rho` exceeds `delta/100`, the knowledge base compounds faster than it decays. In practice this means: **retrieve before creating, persist during work, extract learnings after.** *(This model is adapted from [AgentOps · The Science](https://boshu2.github.io/agentops/the-science/); see CREDITS.md.)*
 
 ## Session Lifecycle (MANDATORY for all dev work)
 
@@ -10,18 +10,18 @@ Every development session must increase the vault's knowledge stock `K` and main
 
 Before writing any code or making decisions:
 
-1. **Search the vault** for prior art — use `vault_search` for related decisions, patterns, past issues
+1. **Search the hive** for prior art — use `hive_search` for related decisions, patterns, past issues
 2. **Load project memory** — check `memory/projects/<project>.md` for accumulated context
 3. **Check relevant ADRs** — search `10-projects/` for architectural decisions that constrain this work
 4. **Stay at 40% context** — load only what's relevant now; JIT-load the rest as needed
 
-> Never start from zero. The vault exists to prevent every session from being Week 0.
+> Never start from zero. The hive exists to prevent every session from being Week 0.
 
 ### Phase 2: Active Development (Increase I(t) and rho)
 
 During development:
 
-1. **Persist decisions immediately** — design rationale, trade-offs, rejected alternatives go in the vault as they happen
+1. **Persist decisions immediately** — design rationale, trade-offs, rejected alternatives go in the hive as they happen
 2. **Link to prior knowledge** — every new note must reference what it builds on via [[wikilinks]]
 3. **Use validation gates** — tests, reviews, linting are the ratchet pawl; don't skip them
 4. **Update project memory** — append significant findings to `memory/projects/<project>.md`
@@ -46,7 +46,7 @@ Periodically (not every session):
 
 ## Anti-Patterns (NEVER do these)
 
-- **Session amnesia** — Starting work without checking what the vault already knows
+- **Session amnesia** — Starting work without checking what the hive already knows
 - **Chat-only knowledge** — Producing useful output that stays only in the conversation
 - **Context stuffing** — Loading everything "just in case" (kills the 40% rule)
 - **Skip the ratchet** — Bypassing validation gates to move faster (you lose the one-way progress guarantee)

@@ -1,4 +1,4 @@
-/* engram docs — interaction + the hero memory-trace graph.
+/* hivemind docs — interaction + the hero memory-trace graph.
    All effects degrade gracefully and respect prefers-reduced-motion. */
 (() => {
   "use strict";
@@ -131,7 +131,7 @@
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  const COLORS = ["#3ce6c4", "#6ad0ff", "#9a8bff"];
+  const COLORS = ["#ff2a33", "#e7000b", "#ff6b5e"];
   let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   let nodes = [];
   let raf = 0, t = 0;

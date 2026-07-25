@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a compact vault brief for Claude Code session start hook."""
+"""Generate a compact hive brief for Claude Code session start hook."""
 
 import json
 import os
@@ -9,9 +9,9 @@ from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 
-VAULT_PATH = os.environ.get("VAULT_PATH", str(Path(__file__).resolve().parents[2]))
-MANIFEST_PATH = os.path.join(VAULT_PATH, "_meta", "vault-manifest.json")
-BUILD_SCRIPT = os.path.join(VAULT_PATH, "_meta", "scripts", "build-manifest.py")
+HIVE_PATH = os.environ.get("HIVE_PATH", str(Path(__file__).resolve().parents[2]))
+MANIFEST_PATH = os.path.join(HIVE_PATH, "_meta", "hive-manifest.json")
+BUILD_SCRIPT = os.path.join(HIVE_PATH, "_meta", "scripts", "build-manifest.py")
 
 
 def rebuild_manifest():
@@ -20,19 +20,19 @@ def rebuild_manifest():
         subprocess.run(
             [sys.executable, BUILD_SCRIPT],
             capture_output=True, text=True, timeout=30,
-            env={**os.environ, "VAULT_PATH": VAULT_PATH},
+            env={**os.environ, "HIVE_PATH": HIVE_PATH},
         )
     except Exception:
         pass
 
 
 def generate_brief():
-    """Generate a compact vault brief."""
+    """Generate a compact hive brief."""
     try:
         with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
             manifest = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        print("Engram: manifest not found. Run: python _meta/scripts/build-manifest.py")
+        print("Hivemind: manifest not found. Run: python _meta/scripts/build-manifest.py")
         return
 
     notes = manifest.get("notes", [])
@@ -56,7 +56,7 @@ def generate_brief():
     recent_domains = Counter(n.get("domain", "unset") for n in recent)
 
     # Build brief
-    lines = [f"Engram: {total} notes indexed."]
+    lines = [f"Hivemind: {total} notes indexed."]
 
     if inbox:
         lines.append(f"Inbox: {inbox} items pending.")

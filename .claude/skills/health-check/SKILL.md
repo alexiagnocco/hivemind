@@ -1,16 +1,16 @@
 ---
 name: health-check
-description: Quick vault health scan checking for orphan notes, broken links, missing frontmatter, and stale content. Use for fast daily or session-start diagnostics.
+description: Quick hive health scan checking for orphan notes, broken links, missing frontmatter, and stale content. Use for fast daily or session-start diagnostics.
 allowed-tools: Read, Glob, Grep, Bash(find *), Bash(wc *)
 ---
 
-# Vault Health Check
+# Hive Health Check
 
-Fast diagnostic scan. Read `_meta/vault-health.md` for the last check date, then scan and update.
+Fast diagnostic scan. Read `_meta/hive-health.md` for the last check date, then scan and update.
 
 ## Checks (run all)
 
-Use `vault_manifest()` to load the full vault index for metadata-based checks (orphans, staleness, missing frontmatter, tags). Use `vault_read()` only when you need to inspect specific note content. This replaces manual Glob/Grep scanning.
+Use `hive_manifest()` to load the full hive index for metadata-based checks (orphans, staleness, missing frontmatter, tags). Use `hive_read()` only when you need to inspect specific note content. This replaces manual Glob/Grep scanning.
 
 1. **Inbox count**: How many notes in `00-inbox/`? Flag if >10. (Count manifest entries with path starting `00-inbox/`.)
 2. **Orphan notes**: Notes with zero inbound links (exclude inbox, templates, meta). (Use manifest `links` field to build a link graph.)
@@ -22,10 +22,10 @@ Use `vault_manifest()` to load the full vault index for metadata-based checks (o
 
 ## Output
 
-Update `_meta/vault-health.md` with:
+Update `_meta/hive-health.md` with:
 
 ```markdown
-# Vault Health
+# Hive Health
 
 Last checked: YYYY-MM-DD
 
@@ -45,4 +45,4 @@ Last checked: YYYY-MM-DD
 - [list specific files/issues if any]
 ```
 
-Display a one-line summary in the terminal: "Vault health: [status]. [N] items need attention."
+Display a one-line summary in the terminal: "Hive health: [status]. [N] items need attention."

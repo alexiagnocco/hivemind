@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# PreToolUse (Bash): block `git stash drop` when cwd is inside the vault
+# PreToolUse (Bash): block `git stash drop` when cwd is inside the hive
 #
 # Rationale: in-progress, untracked authoring (new skills, hooks, notes) often
-# lives in the vault working tree. A `git stash -u` followed by a conflict on
+# lives in the hive working tree. A `git stash -u` followed by a conflict on
 # `git stash pop` and a later `git stash drop` silently destroys that authoring
 # with no recovery path (unlike a tracked-file deletion the reflog can recover).
 
@@ -24,22 +24,22 @@ if ! printf '%s' "$NORMALISED" | grep -qE '(^|[; &|])git stash drop($| |;|&|\|)'
   exit 0
 fi
 
-# Only block when cwd is under the vault root. Outside it, stash drop is fine.
-VAULT_ROOT="${VAULT_PATH:-${CLAUDE_PROJECT_DIR:-$HOME/vault}}"
+# Only block when cwd is under the hive root. Outside it, stash drop is fine.
+HIVE_ROOT="${HIVE_PATH:-${CLAUDE_PROJECT_DIR:-$HOME/hive}}"
 case "$CWD" in
-  "$VAULT_ROOT"|"$VAULT_ROOT"/*) ;;
+  "$HIVE_ROOT"|"$HIVE_ROOT"/*) ;;
   *) exit 0 ;;
 esac
 
 cat <<'MSG' >&2
-BLOCKED: `git stash drop` inside the vault can permanently destroy
+BLOCKED: `git stash drop` inside the hive can permanently destroy
 untracked authoring (skills, hooks, notes). A stash created by
 `git stash -u` takes live untracked work with it when dropped.
 
 Before dropping, verify the stash holds nothing live:
   git stash show --include-untracked -p stash@{0}
 
-Preferred pattern for vault rebases:
+Preferred pattern for hive rebases:
   git add .claude/skills/ .claude/hooks/ .
   git commit -m "WIP: protect untracked before rebase"
   git pull --rebase

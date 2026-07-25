@@ -12,11 +12,11 @@ Surface sessions that contain unextracted knowledge, then mine them.
 
 ## Behavior
 
-1. **Discover** — Call `vault_unmined_sessions` to find sessions with `mineRecommended: true` that haven't been processed.
+1. **Discover** — Call `hive_unmined_sessions` to find sessions with `mineRecommended: true` that haven't been processed.
 2. **Report** — Show each unmined session: date, project, duration, topic summary, why it's worth mining.
 3. **Extract** (if `--extract` or user confirms):
    - For each session, identify: decisions made, patterns learned, gotchas discovered, reusable techniques.
-   - Search vault first (`vault_search`) for existing notes on each topic — append to existing notes when possible.
+   - Search hive first (`hive_search`) for existing notes on each topic — append to existing notes when possible.
    - Create new notes in `30-resources/<domain>/` for genuinely new learnings.
    - Update `memory/projects/<project>.md` with any project-specific context.
    - Mark sessions as mined in `_meta/session-extract-manifest.json`.
@@ -24,9 +24,9 @@ Surface sessions that contain unextracted knowledge, then mine them.
 
 ## Output
 
-All extracted knowledge persists to vault notes. Session processing metadata goes to `_meta/session-extract-manifest.json`.
+All extracted knowledge persists to hive notes. Session processing metadata goes to `_meta/session-extract-manifest.json`.
 
 ## MCP Tool
 
-Primary: `vault_unmined_sessions`
-Supporting: `vault_search`, `vault_read`, `vault_feedback`
+Primary: `hive_unmined_sessions`
+Supporting: `hive_search`, `hive_read`, `hive_feedback`

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Log session metadata to vault session-log.jsonl.
+"""Log session metadata to hive session-log.jsonl.
 
 Called by the global Stop hook at the end of every Claude Code session.
 Scans ALL project directories for sessions, not just the current project.
@@ -17,10 +17,10 @@ from datetime import datetime
 from pathlib import Path
 
 CLAUDE_DIR = Path.home() / ".claude" / "projects"
-# Vault root is configurable via VAULT_PATH; defaults to ~/vault.
-VAULT_META = Path(os.environ.get("VAULT_PATH", str(Path.home() / "vault"))) / "_meta"
-SESSION_LOG = VAULT_META / "session-log.jsonl"
-EXTRACT_MANIFEST = VAULT_META / "session-extract-manifest.json"
+# Hive root is configurable via HIVE_PATH; defaults to ~/hive.
+HIVE_META = Path(os.environ.get("HIVE_PATH", str(Path.home() / "hive"))) / "_meta"
+SESSION_LOG = HIVE_META / "session-log.jsonl"
+EXTRACT_MANIFEST = HIVE_META / "session-extract-manifest.json"
 
 
 def cwd_to_project_dir(cwd: str) -> str:
