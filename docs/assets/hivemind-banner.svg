@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" role="img" aria-label="hivemind — a knowledge-compounding engine">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="90%">
+      <stop offset="0%" stop-color="#160607"/>
+      <stop offset="55%" stop-color="#0a0304"/>
+      <stop offset="100%" stop-color="#040102"/>
+    </radialGradient>
+    <radialGradient id="haze" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#e7000b" stop-opacity="0.16"/>
+      <stop offset="70%" stop-color="#e7000b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#e7000b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1200" height="340" fill="url(#bg)"/>
+  <ellipse cx="600" cy="165" rx="520" ry="200" fill="url(#haze)"/>
+
+  <!-- the vines (upside-down tendrils, corners) -->
+  <g stroke="#7a0208" stroke-width="2.4" fill="none" opacity="0.55" stroke-linecap="round">
+    <path d="M-10,320 C120,300 150,250 210,262 C260,272 280,236 340,244"/>
+    <path d="M-10,338 C160,330 240,296 320,306 C370,312 400,286 452,292"/>
+    <path d="M40,340 C90,312 96,282 150,278"/>
+    <path d="M1210,318 C1080,300 1050,252 990,264 C940,274 918,238 860,246"/>
+    <path d="M1210,338 C1040,332 962,298 880,308 C830,314 800,288 748,294"/>
+    <path d="M1160,340 C1110,314 1104,284 1050,280"/>
+  </g>
+  <g stroke="#a50309" stroke-width="1.2" fill="none" opacity="0.4" stroke-linecap="round">
+    <path d="M-10,300 C90,290 130,258 190,268"/>
+    <path d="M1210,298 C1110,288 1070,256 1010,266"/>
+  </g>
+
+  <!-- floating spores -->
+  <g fill="#e7000b">
+    <circle cx="150" cy="96" r="2.2" opacity="0.35"/>
+    <circle cx="256" cy="180" r="1.6" opacity="0.28"/>
+    <circle cx="352" cy="70" r="1.8" opacity="0.30"/>
+    <circle cx="878" cy="84" r="2.0" opacity="0.32"/>
+    <circle cx="972" cy="176" r="1.5" opacity="0.26"/>
+    <circle cx="1062" cy="104" r="2.4" opacity="0.34"/>
+    <circle cx="520" cy="52" r="1.4" opacity="0.22"/>
+    <circle cx="700" cy="46" r="1.7" opacity="0.25"/>
+  </g>
+
+  <!-- title-card frame lines -->
+  <g stroke="#e7000b" filter="url(#softglow)">
+    <line x1="285" y1="92" x2="915" y2="92" stroke-width="3"/>
+    <line x1="285" y1="92" x2="285" y2="120" stroke-width="3"/>
+    <line x1="915" y1="92" x2="915" y2="120" stroke-width="3"/>
+    <line x1="285" y1="228" x2="915" y2="228" stroke-width="3"/>
+    <line x1="285" y1="228" x2="285" y2="200" stroke-width="3"/>
+    <line x1="915" y1="228" x2="915" y2="200" stroke-width="3"/>
+  </g>
+
+  <!-- title: outlined red serif, ST title-card treatment -->
+  <g font-family="Georgia, 'Times New Roman', 'ITC Benguiat', serif" font-weight="700" text-anchor="middle">
+    <text x="600" y="188" font-size="92" letter-spacing="10"
+          fill="#e7000b" opacity="0.55" filter="url(#glow)">HIVEMIND</text>
+    <text x="600" y="188" font-size="92" letter-spacing="10"
+          fill="#0a0304" stroke="#ff1a25" stroke-width="2.6">HIVEMIND</text>
+  </g>
+
+  <!-- taglines -->
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" fill="#e8b9bb">
+    <text x="600" y="262" font-size="19" letter-spacing="7" opacity="0.9">A  KNOWLEDGE-COMPOUNDING  ENGINE</text>
+    <text x="600" y="296" font-size="15" letter-spacing="4" opacity="0.62" fill="#c96e72">σ · ρ  &gt;  δ / 100  —  STAY  ABOVE  ESCAPE  VELOCITY</text>
+  </g>
+</svg>

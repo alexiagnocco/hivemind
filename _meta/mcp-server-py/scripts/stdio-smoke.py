@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""End-to-end stdio smoke test for the engram MCP server.
+"""End-to-end stdio smoke test for the hivemind MCP server.
 
 Boots the server through ``scripts/launch.sh`` (the same path ``.mcp.json``
 uses, so the wrapper's env resolution is exercised too) and drives a real
-JSON-RPC session over stdio: initialize → tools/list → vault_status →
-vault_retrieve → vault_health.
+JSON-RPC session over stdio: initialize → tools/list → hive_status →
+hive_retrieve → hive_health.
 
 The client keeps stdin OPEN until every expected response has been read.
 stdio MCP servers begin shutdown on stdin EOF and cancel in-flight tool
@@ -46,7 +46,7 @@ def _reader(stream, out: queue.Queue) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="engram stdio smoke test")
+    parser = argparse.ArgumentParser(description="hivemind stdio smoke test")
     parser.add_argument(
         "--timeout",
         type=float,
@@ -103,7 +103,7 @@ def main() -> int:
                     step,
                     "server exited before responding (stdout EOF)",
                     "check server stderr above; "
-                    "try: cd _meta/mcp-server-py && uv run python -m engram",
+                    "try: cd _meta/mcp-server-py && uv run python -m hivemind",
                     stderr_tail,
                 )
             line = line.strip()
@@ -159,7 +159,7 @@ def main() -> int:
             "params": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {},
-                "clientInfo": {"name": "engram-stdio-smoke", "version": "1.0"},
+                "clientInfo": {"name": "hivemind-stdio-smoke", "version": "1.0"},
             },
         }
     )
@@ -179,7 +179,7 @@ def main() -> int:
     send({"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
     tools = read_response(2, "tools/list").get("tools", [])
     names = {t["name"] for t in tools}
-    for required in ("vault_status", "vault_retrieve", "vault_health"):
+    for required in ("hive_status", "hive_retrieve", "hive_health"):
         if required not in names:
             _fail(
                 "tools/list",
@@ -190,42 +190,42 @@ def main() -> int:
     print(f"smoke: tools/list OK — {len(tools)} tools")
     checks += 1
 
-    # 3. vault_status — reports the active embedding backend
-    status = call_tool(3, "vault_status", {}, "vault_status")
+    # 3. hive_status — reports the active embedding backend
+    status = call_tool(3, "hive_status", {}, "hive_status")
     backend = (status.get("embedding_backend") or {}).get("name", "none")
-    print(f"smoke: vault_status OK — state={status.get('state', '?')} backend={backend}")
+    print(f"smoke: hive_status OK — state={status.get('state', '?')} backend={backend}")
     checks += 1
 
-    # 4. vault_retrieve — ranked results over the corpus (may embed on first call)
+    # 4. hive_retrieve — ranked results over the corpus (may embed on first call)
     retrieve = call_tool(
         4,
-        "vault_retrieve",
+        "hive_retrieve",
         {"query": "how should tool calls handle retries safely", "max_results": 3},
-        "vault_retrieve",
+        "hive_retrieve",
     )
     results = retrieve.get("results", [])
     if not results:
         _fail(
-            "vault_retrieve",
+            "hive_retrieve",
             "0 results over the seeded corpus",
             "manifest missing or empty — run the manifest build step, then retry",
             stderr_tail,
         )
     top = results[0]
-    print(f"smoke: vault_retrieve OK — {len(results)} results, top={top.get('path', '?')}")
+    print(f"smoke: hive_retrieve OK — {len(results)} results, top={top.get('path', '?')}")
     checks += 1
 
-    # 5. vault_health — metrics compute
-    health = call_tool(5, "vault_health", {"window_days": 7}, "vault_health")
+    # 5. hive_health — metrics compute
+    health = call_tool(5, "hive_health", {"window_days": 7}, "hive_health")
     k = health.get("K", health.get("k"))
     if k is None:
         _fail(
-            "vault_health",
+            "hive_health",
             "no K metric in response",
             "health computation failed — inspect output",
             stderr_tail,
         )
-    print(f"smoke: vault_health OK — K={k} status={health.get('status', '?')}")
+    print(f"smoke: hive_health OK — K={k} status={health.get('status', '?')}")
     checks += 1
 
     # Only now is EOF safe: every expected response has been read.

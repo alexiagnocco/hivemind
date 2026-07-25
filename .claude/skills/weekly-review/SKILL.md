@@ -1,25 +1,25 @@
 ---
 name: weekly-review
-description: Generate a "State of the Vault" assessment covering what's working, what's decaying, behavioral patterns, and specific next actions. Use weekly or biweekly.
+description: Generate a "State of the Hive" assessment covering what's working, what's decaying, behavioral patterns, and specific next actions. Use weekly or biweekly.
 allowed-tools: Read, Write, Glob, Grep, Bash(find *), Bash(wc *), Bash(sort *)
 ---
 
-# Weekly Review — State of the Vault
+# Weekly Review — State of the Hive
 
 > **Recommended mode: Plan.** This skill analyzes behavioral patterns, compares trends, and generates honest assessments. Plan mode produces significantly better insight here. Switch with `Shift+Tab` if needed.
 
-Generate an honest assessment of vault health, usage patterns, and recommended changes.
+Generate an honest assessment of hive health, usage patterns, and recommended changes.
 
 ## Focus Mode
 
-The weekly review ALWAYS analyzes the full vault — this is a meta-level assessment where cross-domain visibility matters. However, in the terminal output, organize findings by domain and clearly label each section so the user can skip domains they're not focused on right now.
+The weekly review ALWAYS analyzes the full hive — this is a meta-level assessment where cross-domain visibility matters. However, in the terminal output, organize findings by domain and clearly label each section so the user can skip domains they're not focused on right now.
 
 ## Step 1: Gather Data
 
-Use Engram tools for efficient data gathering:
-- `vault_recent(days=7)` for all notes modified in the last week, grouped by domain
-- `vault_manifest()` for full vault state (inbox count, total notes, domain distribution)
-- Read `_meta/vault-health.md` for current metrics
+Use Hivemind tools for efficient data gathering:
+- `hive_recent(days=7)` for all notes modified in the last week, grouped by domain
+- `hive_manifest()` for full hive state (inbox count, total notes, domain distribution)
+- Read `_meta/hive-health.md` for current metrics
 - Read the most recent review in `_meta/reviews/` for comparison
 - Identify which domains had zero activity
 - Check inbox backlog trend (growing, stable, shrinking)
@@ -53,7 +53,7 @@ status: done
 tags: [meta, review]
 ---
 
-# State of the Vault — YYYY-MM-DD
+# State of the Hive — YYYY-MM-DD
 
 ## Summary
 [3-4 sentence overview]

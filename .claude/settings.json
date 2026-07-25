@@ -21,14 +21,14 @@
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-vault-delete-guard.sh" },
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-vault-stash-guard.sh" }
+          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-hive-delete-guard.sh" },
+          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-bash-hive-stash-guard.sh" }
         ]
       },
       {
         "matcher": "Write",
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-write-vault-check.sh" }
+          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/pre-write-hive-check.sh" }
         ]
       }
     ],
@@ -44,9 +44,9 @@
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/session-hygiene.sh" },
+          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/stop-session-hygiene.sh" },
           { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/stop-log-session.sh" },
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/stop-vault-sync.sh" },
+          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/stop-hive-sync.sh" },
           { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/stop-wrap-reminder.sh" }
         ]
       }

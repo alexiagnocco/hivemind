@@ -465,6 +465,52 @@ wheels = [
 ]
 
 [[package]]
+name = "hivemind"
+version = "4.0.0"
+source = { editable = "." }
+dependencies = [
+    { name = "anyio" },
+    { name = "fastmcp" },
+    { name = "httpx" },
+    { name = "keyring" },
+    { name = "pydantic-settings" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "hypothesis" },
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "respx" },
+    { name = "ruff" },
+]
+embeddings = [
+    { name = "numpy" },
+    { name = "onnxruntime" },
+    { name = "tokenizers" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "anyio", specifier = ">=4.0.0,<5.0.0" },
+    { name = "fastmcp", specifier = ">=2.0.0,<4.0.0" },
+    { name = "httpx", specifier = ">=0.27.0,<1.0.0" },
+    { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6.100" },
+    { name = "keyring", specifier = ">=25.0.0,<27.0.0" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13" },
+    { name = "numpy", marker = "extra == 'embeddings'", specifier = ">=1.26" },
+    { name = "onnxruntime", marker = "extra == 'embeddings'", specifier = ">=1.17" },
+    { name = "pydantic-settings", specifier = ">=2.0.0,<3.0.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.24" },
+    { name = "respx", marker = "extra == 'dev'", specifier = ">=0.22" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.8" },
+    { name = "tokenizers", marker = "extra == 'embeddings'", specifier = ">=0.20" },
+]
+provides-extras = ["dev", "embeddings"]
+
+[[package]]
 name = "httpcore"
 version = "1.0.9"
 source = { registry = "https://pypi.org/simple" }
@@ -1635,52 +1681,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/1f/93/041fca8274050e40e
 wheels = [
     { url = "https://files.pythonhosted.org/packages/31/a3/5b1562db76a5a488274b2332a97199b32d0442aca0ed193697fd47786316/uvicorn-0.46.0-py3-none-any.whl", hash = "sha256:bbebbcbed972d162afca128605223022bedd345b7bc7855ce66deb31487a9048", size = 70926, upload-time = "2026-04-23T07:15:58.355Z" },
 ]
-
-[[package]]
-name = "engram"
-version = "4.0.0"
-source = { editable = "." }
-dependencies = [
-    { name = "anyio" },
-    { name = "fastmcp" },
-    { name = "httpx" },
-    { name = "keyring" },
-    { name = "pydantic-settings" },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "hypothesis" },
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "respx" },
-    { name = "ruff" },
-]
-embeddings = [
-    { name = "numpy" },
-    { name = "onnxruntime" },
-    { name = "tokenizers" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "anyio", specifier = ">=4.0.0,<5.0.0" },
-    { name = "fastmcp", specifier = ">=2.0.0,<4.0.0" },
-    { name = "httpx", specifier = ">=0.27.0,<1.0.0" },
-    { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6.100" },
-    { name = "keyring", specifier = ">=25.0.0,<27.0.0" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13" },
-    { name = "numpy", marker = "extra == 'embeddings'", specifier = ">=1.26" },
-    { name = "onnxruntime", marker = "extra == 'embeddings'", specifier = ">=1.17" },
-    { name = "pydantic-settings", specifier = ">=2.0.0,<3.0.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.24" },
-    { name = "respx", marker = "extra == 'dev'", specifier = ">=0.22" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.8" },
-    { name = "tokenizers", marker = "extra == 'embeddings'", specifier = ">=0.20" },
-]
-provides-extras = ["dev", "embeddings"]
 
 [[package]]
 name = "watchfiles"

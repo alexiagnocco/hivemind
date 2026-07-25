@@ -13,8 +13,8 @@ from urllib.parse import unquote
 import httpx
 import respx
 
-from engram.config import Settings
-from engram.rest.client import (
+from hivemind.config import Settings
+from hivemind.rest.client import (
     ObsidianRestClient,
     _encode_header,
     _safe_header,

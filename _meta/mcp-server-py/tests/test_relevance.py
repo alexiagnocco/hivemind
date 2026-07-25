@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 
-from engram.scoring.relevance import (
+from hivemind.scoring.relevance import (
     connectivity_score,
     freshness_score,
     match_note,

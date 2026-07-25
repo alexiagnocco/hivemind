@@ -6,13 +6,13 @@ allowed-tools: Read, Write, Glob, Grep, Bash(find *), Bash(grep *)
 
 # Cross-Domain Connector
 
-> **Recommended mode: Plan.** Finding non-obvious connections requires deep reasoning across the full vault. Fast mode will find surface-level matches; plan mode finds the insights that make this skill worthwhile. Switch with `Shift+Tab` if needed.
+> **Recommended mode: Plan.** Finding non-obvious connections requires deep reasoning across the full hive. Fast mode will find surface-level matches; plan mode finds the insights that make this skill worthwhile. Switch with `Shift+Tab` if needed.
 
 Surface non-obvious connections between notes across different domains. This is where the second brain earns its name.
 
 ## Step 1: Build a Concept Index
 
-Use `vault_manifest()` to get the full vault index. For notes that look promising for connections, use `vault_read()` to get full content. This replaces manual file scanning.
+Use `hive_manifest()` to get the full hive index. For notes that look promising for connections, use `hive_read()` to get full content. This replaces manual file scanning.
 
 For each note outside `00-inbox/` and `40-archive/`, extract:
 

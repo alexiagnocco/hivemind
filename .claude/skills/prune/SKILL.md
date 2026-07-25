@@ -1,6 +1,6 @@
 ---
 name: prune
-description: "Archive stale notes, clean completed items, and maintain vault scale — the remediation half of /health-check"
+description: "Archive stale notes, clean completed items, and maintain hive scale — the remediation half of /health-check"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(mv *), Bash(find *)
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(mv *), Bash(find *)
 
 > **Recommended mode: Plan.** Pruning touches multiple files and benefits from seeing the full candidate list before acting. Switch with `Shift+Tab` if you're not in plan mode.
 
-Archive stale notes, clean completed items, and maintain vault scale. This is the remediation counterpart to `/health-check` — health-check detects problems, prune fixes them. Implements Phase 4 ("Scale Management") of the knowledge-compounding workflow.
+Archive stale notes, clean completed items, and maintain hive scale. This is the remediation counterpart to `/health-check` — health-check detects problems, prune fixes them. Implements Phase 4 ("Scale Management") of the knowledge-compounding workflow.
 
 **Core rule: Never delete notes.** All pruning moves notes to `40-archive/` with `status: archived`.
 
@@ -32,7 +32,7 @@ These folders are exempt from pruning — they are ongoing, structural, or persi
 
 ## Step 1: Identify Candidates
 
-Use `vault_manifest()` to load the full vault index. Scan for pruning candidates in eligible locations (`00-inbox/`, `10-projects/`, `30-resources/`):
+Use `hive_manifest()` to load the full hive index. Scan for pruning candidates in eligible locations (`00-inbox/`, `10-projects/`, `30-resources/`):
 
 ### Stale Notes
 - Notes with `updated:` field >30 days old in `10-projects/` and `30-resources/`
@@ -84,7 +84,7 @@ Action: Archive (a), Keep (k), Merge (m), Skip (s)?
 
 **Batch mode:** If the user responds with "archive all stale" or similar, apply the recommended action to all remaining candidates of that type without further prompts. Confirm the batch count before executing: "Will archive N stale notes. Proceed?"
 
-**Propose before executing:** If the total actions will touch >3 files, present the full plan and wait for approval before making any changes. This is a vault operating rule.
+**Propose before executing:** If the total actions will touch >3 files, present the full plan and wait for approval before making any changes. This is a hive operating rule.
 
 ## Step 4: Execute Decisions
 
@@ -120,7 +120,7 @@ After all decisions are executed:
    - Flagged for merge: N notes
    - Skipped: N notes
    ```
-3. **Rebuild manifest**: Run `python _meta/scripts/build-manifest.py` to update the vault index after moves.
+3. **Rebuild manifest**: Run `python _meta/scripts/build-manifest.py` to update the hive index after moves.
 
 ## Step 6: Report
 
@@ -145,7 +145,7 @@ Display a terminal summary:
 
 ## Focus Mode
 
-Scan ALL eligible locations regardless of focus mode (pruning is a vault-wide maintenance task, like `/health-check`). When reporting results, highlight items in the active focus domain first. Summarize out-of-focus items as a count: "Also found N candidates outside your current focus."
+Scan ALL eligible locations regardless of focus mode (pruning is a hive-wide maintenance task, like `/health-check`). When reporting results, highlight items in the active focus domain first. Summarize out-of-focus items as a count: "Also found N candidates outside your current focus."
 
 ## Rules
 

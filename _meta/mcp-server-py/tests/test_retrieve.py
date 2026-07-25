@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-from engram.scoring.retrieve import retrieve
+from hivemind.scoring.retrieve import retrieve
 
 
 @pytest.fixture

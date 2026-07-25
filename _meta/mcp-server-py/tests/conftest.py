@@ -1,4 +1,4 @@
-"""Shared fixtures for the engram test suite."""
+"""Shared fixtures for the hivemind test suite."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from engram.model.note import Note
-from engram.scoring.embeddings import HashingEmbeddingBackend
+from hivemind.model.note import Note
+from hivemind.scoring.embeddings import HashingEmbeddingBackend
 
 if TYPE_CHECKING:
     from collections.abc import Callable

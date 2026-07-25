@@ -1,10 +1,10 @@
-"""Tests for the native manifest builder (engram.manifest.builder)."""
+"""Tests for the native manifest builder (hivemind.manifest.builder)."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from engram.manifest.builder import build_manifest
+from hivemind.manifest.builder import build_manifest
 
 if TYPE_CHECKING:
     from pathlib import Path

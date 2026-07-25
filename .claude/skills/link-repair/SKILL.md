@@ -1,12 +1,12 @@
 ---
 name: link-repair
-description: "Fix broken wikilinks, link orphan notes to MOCs, and repair escape-character bugs in vault notes"
+description: "Fix broken wikilinks, link orphan notes to MOCs, and repair escape-character bugs in hive notes"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash(python *)
 ---
 
 # /link-repair — Broken Link & Orphan Remediation
 
-Scan the vault for broken wikilinks, orphan notes, and escape-character bugs, then fix them interactively. This is the remediation counterpart to `/health-check`, which detects but doesn't repair.
+Scan the hive for broken wikilinks, orphan notes, and escape-character bugs, then fix them interactively. This is the remediation counterpart to `/health-check`, which detects but doesn't repair.
 
 ## Usage
 
@@ -19,28 +19,28 @@ Scan the vault for broken wikilinks, orphan notes, and escape-character bugs, th
 
 ### Step 1: Build the File Index
 
-Use Glob to collect all `.md` files in the vault. Build two lookup structures:
+Use Glob to collect all `.md` files in the hive. Build two lookup structures:
 
 - **Path set**: All `.md` file paths (for existence checks)
 - **Name map**: Lowercase filename (without `.md`) → full path (for fuzzy matching)
 
-**Exclusions for the file index**: Skip files in `40-archive/`, `_templates/`, `_meta/scripts/`, `_meta/mcp-server-py/`, and any `SKILL.md` or `README.md` files outside the main vault content folders. These are system/archived notes that don't need repair.
+**Exclusions for the file index**: Skip files in `40-archive/`, `_templates/`, `_meta/scripts/`, `_meta/mcp-server-py/`, and any `SKILL.md` or `README.md` files outside the main hive content folders. These are system/archived notes that don't need repair.
 
 ### Step 2: Scan for Broken Wikilinks
 
-Use Grep to find all `[[wikilinks]]` across vault `.md` files. Apply these **source file exclusions** — these files are historical records or system-generated and their broken links are expected/intentional:
+Use Grep to find all `[[wikilinks]]` across hive `.md` files. Apply these **source file exclusions** — these files are historical records or system-generated and their broken links are expected/intentional:
 
 **Skip scanning these source files entirely:**
 - `40-archive/` — archived notes, stale references are expected
-- `_meta/vault-audit-*.md` — point-in-time audit snapshots with pre-reorg naming
-- `_meta/vault-maintenance*.md` — historical maintenance reports
-- `_meta/vault-evolution-log.md` — evolution run history with template examples
+- `_meta/hive-audit-*.md` — point-in-time audit snapshots with pre-reorg naming
+- `_meta/hive-maintenance*.md` — historical maintenance reports
+- `_meta/hive-evolution-log.md` — evolution run history with template examples
 - `_meta/inbox/daily-triage-*.md` — auto-generated daily triage logs
 - `_meta/reviews/*-connection-scan*.md` — auto-generated connection scan reports
 - `_meta/CLAUDE-md-update-proposal-*.md` — evolution proposals with example syntax
 - `EXAMPLES.md` — example syntax file
 
-**Skip these link targets as non-content (they live in `.claude/` not the vault):**
+**Skip these link targets as non-content (they live in `.claude/` not the hive):**
 - Skill names: `[[boot]]`, `[[recall]]`, `[[evolve]]`, `[[frame]]`, and any other `.claude/skills/` name
 - Rule names: `[[frontmatter-schema]]`, `[[skills]]`, `[[wiki-links]]`, `[[wikilinks]]`
 
@@ -175,6 +175,6 @@ Output a final summary:
 - **Skip system files** — `_templates/`, `_meta/scripts/`, `_meta/mcp-server-py/`, SKILL.md backups, README files
 - **Don't touch Dataview blocks** — flag escape issues inside ```dataview fences but don't auto-fix
 - **Respect existing link aliases** — when fixing `[[broken|My Alias]]`, preserve the alias: `[[correct|My Alias]]`
-- **After all fixes**, suggest: "Rebuild the manifest index (vault_rebuild, or python _meta/scripts/build-manifest.py)."
+- **After all fixes**, suggest: "Rebuild the manifest index (hive_rebuild, or python _meta/scripts/build-manifest.py)."
 - **One summary line** for terminal: "Link repair: N fixed, N linked, N flagged for review."
 - End with Recommended Next Steps

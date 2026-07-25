@@ -1,5 +1,5 @@
 ---
-description: YAML frontmatter schema and tag policy for all vault notes
+description: YAML frontmatter schema and tag policy for all hive notes
 globs: "**/*.md"
 ---
 
@@ -71,9 +71,9 @@ Tags are for **cross-cutting topics not captured by `domain`, `type`, or `status
 | `#testing`      | Tests, eval harnesses, QA           |
 | `#retrieval`    | Search, ranking, embeddings         |
 | `#mcp`          | MCP servers, agent tooling          |
-| `#obsidian`     | Vault, PKM, plugins                 |
+| `#obsidian`     | Hive, PKM, plugins                 |
 | `#ai`           | AI tooling, Claude Code             |
-| `#meta`         | Vault system files                  |
+| `#meta`         | Hive system files                  |
 | `#synthesis`    | Cross-domain connection notes       |
 | `#architecture` | Architectural decisions/patterns    |
 | `#optimization` | Cross-cutting optimization patterns |

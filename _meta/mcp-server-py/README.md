@@ -1,4 +1,4 @@
-# engram
+# hivemind
 
 A [FastMCP](https://github.com/jlowin/fastmcp) MCP server that gives Claude Code
 (and any MCP client) structured, persistent access to a local Markdown knowledge
@@ -24,32 +24,32 @@ before `uv run` to avoid the Claude Code runtime's `/usr` venv warning).
 ## Configuration
 
 Settings load from environment variables or a `.env` file (see `config.py`).
-The API key falls back to the OS keyring (`keyring.get_password("engram",
+The API key falls back to the OS keyring (`keyring.get_password("hivemind",
 "obsidian-rest")`).
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `VAULT_PATH` | `~/vault` | Vault root |
+| `HIVE_PATH` | `~/vault` | Vault root |
 | `OBSIDIAN_REST_URL` | `https://127.0.0.1:27124` | Local REST API base |
 | `OBSIDIAN_API_KEY` | — | Bearer token (or via keyring) |
 | `OBSIDIAN_FALLBACK_MODE` | `auto` | `auto` \| `rest_only` \| `fs_only` |
-| `ENGRAM_EMBEDDINGS_BACKEND` | `auto` | `auto` \| `onnx` \| `hashing` \| `none` |
-| `ENGRAM_EMBEDDINGS_MODEL_DIR` | — | Dir with `model.onnx` + `tokenizer.json` |
-| `ENGRAM_EMBEDDINGS_DIM` | `256` | Hashing-backend vector dimension |
-| `ENGRAM_DENSE_WEIGHT` | `1.0` | Weight of dense vs keyword in fusion |
+| `HIVEMIND_EMBEDDINGS_BACKEND` | `auto` | `auto` \| `onnx` \| `hashing` \| `none` |
+| `HIVEMIND_EMBEDDINGS_MODEL_DIR` | — | Dir with `model.onnx` + `tokenizer.json` |
+| `HIVEMIND_EMBEDDINGS_DIM` | `256` | Hashing-backend vector dimension |
+| `HIVEMIND_DENSE_WEIGHT` | `1.0` | Weight of dense vs keyword in fusion |
 
 ## Tools
 
-`vault_status`, `vault_search`, `vault_read`, `vault_recent`, `vault_related`,
-`vault_manifest`, `vault_rebuild`, `vault_document_map`, `vault_tags`,
-`vault_active`, `vault_retrieve`, `vault_health`, `vault_context`,
-`vault_session_check`, `vault_feedback`, `vault_sigma_rho`, `vault_prune_dryrun`,
-`vault_unmined_sessions`, `vault_checkpoint`, `vault_patch`, `vault_periodic`,
-`vault_command`, `vault_open`.
+`hive_status`, `hive_search`, `hive_read`, `hive_recent`, `hive_related`,
+`hive_manifest`, `hive_rebuild`, `hive_document_map`, `hive_tags`,
+`hive_active`, `hive_retrieve`, `hive_health`, `hive_context`,
+`hive_session_check`, `hive_feedback`, `hive_sigma_rho`, `hive_prune_dryrun`,
+`hive_unmined_sessions`, `hive_checkpoint`, `hive_patch`, `hive_periodic`,
+`hive_command`, `hive_open`.
 
-## Hybrid retrieval (`vault_retrieve`)
+## Hybrid retrieval (`hive_retrieve`)
 
-`vault_retrieve` performs **hybrid composite + dense-vector retrieval with
+`hive_retrieve` performs **hybrid composite + dense-vector retrieval with
 two-stage re-ranking**:
 
 1. **Fusion / candidate generation.** Every eligible note is scored by both the
@@ -70,7 +70,7 @@ configured (or an empty query) it falls back to the original keyword-only path.
 | Hashing (default fallback) | none | Deterministic SHA-1 feature hashing. Always available. **Lexical, not semantic.** |
 | ONNX | `embeddings` extra | Real sentence-transformer (e.g. all-MiniLM-L6-v2) via onnxruntime. **Semantic.** |
 
-Per-note vectors are cached incrementally in `_meta/vault-embeddings.json`
+Per-note vectors are cached incrementally in `_meta/hive-embeddings.json`
 (gitignored); only changed notes re-embed.
 
 ### Enabling the semantic (ONNX) backend
@@ -78,8 +78,8 @@ Per-note vectors are cached incrementally in `_meta/vault-embeddings.json`
 ```bash
 uv sync --extra embeddings
 uv run --extra embeddings python scripts/fetch-embedding-model.py   # downloads MiniLM ONNX
-export ENGRAM_EMBEDDINGS_BACKEND=onnx
-export ENGRAM_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2
+export HIVEMIND_EMBEDDINGS_BACKEND=onnx
+export HIVEMIND_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2
 # restart the server
 ```
 

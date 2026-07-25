@@ -3,31 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>engram — a knowledge-compounding engine</title>
-<meta name="description" content="engram turns an AI coding agent's transient context into a durable, self-improving knowledge base: a Python MCP server with hybrid keyword+dense retrieval and a reinforcement-learning feedback loop, plus a layered stack of skills, hooks, rules, and subagents.">
-<meta name="theme-color" content="#06080f">
+<title>hivemind — a knowledge-compounding engine</title>
+<meta name="description" content="hivemind turns an AI coding agent's transient context into a durable, self-improving knowledge base: a Python MCP server with hybrid keyword+dense retrieval and a reinforcement-learning feedback loop, plus a layered stack of skills, hooks, rules, and subagents.">
+<meta name="theme-color" content="#070203">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="engram — a knowledge-compounding engine">
+<meta property="og:title" content="hivemind — a knowledge-compounding engine">
 <meta property="og:description" content="Hybrid retrieval + a reinforcement-learning feedback loop for AI agent memory. σ·ρ > δ/100.">
-<meta property="og:url" content="https://alexiagnocco.github.io/engram/">
-<meta property="og:image" content="https://alexiagnocco.github.io/engram/assets/engram-banner.svg">
+<meta property="og:url" content="https://alexiagnocco.github.io/hivemind/">
+<meta property="og:image" content="https://alexiagnocco.github.io/hivemind/assets/hivemind-banner.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="engram — a knowledge-compounding engine">
+<meta name="twitter:title" content="hivemind — a knowledge-compounding engine">
 <meta name="twitter:description" content="Hybrid retrieval + a reinforcement-learning feedback loop for AI agent memory.">
-<meta name="twitter:image" content="https://alexiagnocco.github.io/engram/assets/engram-banner.svg">
+<meta name="twitter:image" content="https://alexiagnocco.github.io/hivemind/assets/hivemind-banner.svg">
 
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="nav" id="top">
-  <a class="brand" href="#top" aria-label="engram home">
+  <a class="brand" href="#top" aria-label="hivemind home">
     <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
       <g stroke="currentColor" stroke-width="2" opacity="0.5" fill="none">
         <line x1="18" y1="20" x2="32" y2="34"/><line x1="46" y1="18" x2="32" y2="34"/>
@@ -38,7 +38,7 @@
       <circle cx="44" cy="46" r="4.2" fill="currentColor"/>
       <circle cx="32" cy="34" r="6.5" fill="currentColor"/>
     </svg>
-    <span>engram</span>
+    <span>hivemind</span>
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#thesis">Thesis</a>
@@ -47,7 +47,7 @@
     <a href="#reference">Reference</a>
     <a href="#quickstart">Quick start</a>
     <a href="#credits">Credits</a>
-    <a class="nav-cta" href="https://github.com/alexiagnocco/engram">GitHub ↗</a>
+    <a class="nav-cta" href="https://github.com/alexiagnocco/hivemind">GitHub ↗</a>
   </nav>
 </header>
 
@@ -57,12 +57,13 @@
     <canvas id="graph" aria-hidden="true"></canvas>
     <div class="hero-bloom" aria-hidden="true"></div>
     <div class="hero-inner">
-      <p class="eyebrow reveal">memory that strengthens with use</p>
-      <h1 class="reveal" style="--d:1">engram</h1>
+      <p class="eyebrow reveal">one network · every note · a single will</p>
+      <h1 class="reveal" style="--d:1">hivemind</h1>
       <p class="lede reveal" style="--d:2">
         A knowledge-compounding engine for engineering work — built as a set of
-        <span class="hl">Claude&nbsp;Code customization layers</span>. It turns an AI agent's
-        transient context into a durable, self-improving knowledge base.
+        <span class="hl">Claude&nbsp;Code customization layers</span>. It links an AI agent's
+        transient context into a durable, self-improving knowledge base:
+        one hive, every note a node, memory that strengthens with use.
       </p>
       <div class="equation reveal" style="--d:3" role="img" aria-label="sigma times rho is greater than delta over one hundred">
         <span class="eq-term" data-tip="coverage">σ</span>
@@ -75,14 +76,14 @@
       <p class="eq-caption reveal" style="--d:4">surface the right things faster than you forget them — and knowledge compounds above <em>escape velocity</em>.</p>
       <div class="cta-row reveal" style="--d:5">
         <a class="btn btn-primary" href="#engine">See the retrieval engine</a>
-        <a class="btn btn-ghost" href="https://github.com/alexiagnocco/engram">View source ↗</a>
+        <a class="btn btn-ghost" href="https://github.com/alexiagnocco/hivemind">View source ↗</a>
       </div>
       <ul class="stat-strip reveal" style="--d:6">
         <li><b>23</b><span>MCP tools</span></li>
-        <li><b>21</b><span>skills</span></li>
+        <li><b>22</b><span>skills</span></li>
         <li><b>15</b><span>hooks</span></li>
         <li><b>8</b><span>rules</span></li>
-        <li><b>68</b><span>tests</span></li>
+        <li><b>207</b><span>tests</span></li>
       </ul>
     </div>
     <a class="scroll-hint" href="#thesis" aria-label="Scroll to thesis">↓</a>
@@ -93,7 +94,7 @@
     <div class="band-head reveal">
       <span class="kicker">01 — the thesis</span>
       <h2>A knowledge base only compounds when retrieval outruns decay.</h2>
-      <p class="band-sub">Three terms decide whether a memory system grows or rots. engram is engineered to push each one in the right direction.</p>
+      <p class="band-sub">Three terms decide whether a memory system grows or rots. hivemind is engineered to push each one in the right direction.</p>
     </div>
     <div class="cards three">
       <article class="card reveal">
@@ -121,7 +122,7 @@
     <div class="band-head reveal">
       <span class="kicker">02 — the engineering centerpiece</span>
       <h2>A two-stage hybrid ranker with a learned utility signal.</h2>
-      <p class="band-sub">The retrieval tool, <code>vault_retrieve</code>, scores every note two ways, fuses them, then re-ranks the top pool by a reinforcement-learning reward that the system teaches itself.</p>
+      <p class="band-sub">The retrieval tool, <code>hive_retrieve</code>, scores every note two ways, fuses them, then re-ranks the top pool by a reinforcement-learning reward that the system teaches itself.</p>
     </div>
 
     <div class="engine-grid">
@@ -129,9 +130,9 @@
         <li class="stage reveal">
           <span class="stage-no">1</span>
           <h3>Fusion &amp; candidacy</h3>
-          <p>Every eligible note is scored by a <b>keyword composite</b> and <b>dense-vector cosine similarity</b> at once, then ranked on the normalized sum. Candidacy no longer needs a keyword hit — a conceptually relevant note with zero shared words still surfaces.</p>
-          <pre class="formula"><code>score = zNorm(match·3 + freshness·2 + connectivity·1)
-      + W_DENSE · zNorm(cosine(q, note))</code></pre>
+          <p>Every eligible note is scored by a <b>keyword composite</b> and <b>dense-vector cosine similarity</b> at once, then fused by <b>Reciprocal Rank Fusion</b> across both legs (the previous z-norm score fusion stays behind <code>HIVEMIND_FUSION=znorm</code>). Candidacy no longer needs a keyword hit — a conceptually relevant note with zero shared words still surfaces.</p>
+          <pre class="formula"><code>keyword = match·3 + freshness·2 + connectivity·1
+fused   = Σ 1 / (k + rank_leg)        # RRF over both legs</code></pre>
         </li>
         <li class="stage reveal" style="--d:1">
           <span class="stage-no">2</span>
@@ -154,12 +155,16 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
       </aside>
     </div>
 
-    <div class="cards two engine-foot">
+    <div class="cards three engine-foot">
       <article class="card reveal">
         <h3>Measured, not assumed</h3>
-        <p><code>vault_feedback</code> records the reward · <code>vault_sigma_rho</code> reads accumulated feedback back out as measured coverage/precision · <code>vault_health</code> reports whether the whole system is above escape velocity.</p>
+        <p><code>hive_feedback</code> records the reward · <code>hive_sigma_rho</code> reads accumulated feedback back out as measured coverage/precision · <code>hive_health</code> reports whether the whole system is above escape velocity. The loop stays live even without Obsidian (fs_only mode).</p>
       </article>
       <article class="card reveal" style="--d:1">
+        <h3>Reach into the Void</h3>
+        <p><code>hive_retrieve(granularity="chunk")</code> returns <b>section-anchored hits</b> with excerpts — notes split at heading boundaries with Contextual Chunk Headers embedded into each vector. <code>detail: minimal|standard|full</code> sizes every response; <code>hive_context</code> packs context + hits + neighbors + a retrievalId into one call.</p>
+      </article>
+      <article class="card reveal" style="--d:2">
         <h3>Pluggable embeddings</h3>
         <p>A dependency-free <b>hashing</b> backend (deterministic SHA-1 feature hashing, always available) or a <b>semantic ONNX</b> backend (a real sentence-transformer via <code>onnxruntime</code>). Vectors cache by content hash — only changed notes re-embed.</p>
       </article>
@@ -176,22 +181,22 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
 
     <div class="stack reveal">
       <div class="stack-row layers">
-        <div class="layer"><b>Skills</b><span>21 · slash-command workflows</span></div>
+        <div class="layer"><b>Skills</b><span>22 · slash-command workflows</span></div>
         <div class="layer"><b>Hooks</b><span>15 · deterministic automation</span></div>
         <div class="layer"><b>Rules</b><span>8 · always-on conventions</span></div>
-        <div class="layer"><b>Agents</b><span>2 · context-isolated subagents</span></div>
+        <div class="layer"><b>Agents</b><span>3 · context-isolated subagents</span></div>
       </div>
       <div class="stack-flow">read / write ▾</div>
       <div class="stack-row server">
         <div class="layer wide">
-          <b>engram MCP server</b>
-          <span>23 tools · Python / FastMCP · hybrid retrieval · MemRL · health</span>
+          <b>hivemind MCP server · Vecna</b>
+          <span>23 tools (8 lean) · Python / FastMCP · RRF hybrid retrieval · MemRL · health</span>
         </div>
       </div>
       <div class="stack-flow">operates on ▾ &nbsp;·&nbsp; ▴ feedback signal</div>
-      <div class="stack-row vault">
+      <div class="stack-row hive">
         <div class="layer wide alt">
-          <b>the vault</b>
+          <b>the hive</b>
           <span>a PARA-organized store of Markdown notes + a link graph</span>
         </div>
       </div>
@@ -215,28 +220,28 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
   <section id="reference" class="band band-alt">
     <div class="band-head reveal">
       <span class="kicker">04 — reference</span>
-      <h2>23 tools, 21 skills.</h2>
+      <h2>23 tools, 22 skills.</h2>
       <p class="band-sub">The MCP surface and the workflows that compose it.</p>
     </div>
 
     <div class="ref-tabs reveal" role="tablist" aria-label="Reference categories">
       <button class="ref-tab active" role="tab" aria-selected="true" aria-controls="panel-tools" id="tab-tools">MCP Tools <span class="count">23</span></button>
-      <button class="ref-tab" role="tab" aria-selected="false" aria-controls="panel-skills" id="tab-skills">Skills <span class="count">21</span></button>
+      <button class="ref-tab" role="tab" aria-selected="false" aria-controls="panel-skills" id="tab-skills">Skills <span class="count">22</span></button>
     </div>
 
     <div class="ref-container reveal" style="--d:1">
       <div class="ref-panel active" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
         <div class="chip-group">
           <span class="grp-label">read / search</span>
-          <code data-desc="Connection status, plugin version, server health, and the active embedding backend (semantic vs lexical fallback).">vault_status</code><code data-desc="Search vault notes by metadata filters and/or text query.">vault_search</code><code data-desc="Read the full content of one or more vault notes by path.">vault_read</code><code data-desc="Get notes modified in the last N days.">vault_recent</code><code data-desc="Get bidirectional link neighbors for a note.">vault_related</code><code data-desc="Return the vault manifest index.">vault_manifest</code><code data-desc="Trigger a manifest rebuild from vault contents.">vault_rebuild</code><code data-desc="Get the heading/block/frontmatter skeleton for a note. Requires REST.">vault_document_map</code><code data-desc="List all tags with hierarchical counts. Requires REST.">vault_tags</code><code data-desc="Read, append to, or replace the currently-open note in Obsidian. Requires REST.">vault_active</code>
+          <code data-desc="Connection status, plugin version, server health, and the active embedding backend (semantic vs lexical fallback).">hive_status</code><code data-desc="Search hive notes by metadata filters and/or text query.">hive_search</code><code data-desc="Read the full content of one or more hive notes by path.">hive_read</code><code data-desc="Get notes modified in the last N days.">hive_recent</code><code data-desc="Get bidirectional link neighbors for a note.">hive_related</code><code data-desc="Return the hive manifest index.">hive_manifest</code><code data-desc="Rebuild the manifest index and pre-warm the note-embedding and chunk indexes.">hive_rebuild</code><code data-desc="Get the heading/block/frontmatter skeleton for a note. Requires REST.">hive_document_map</code><code data-desc="List all tags with hierarchical counts. Requires REST.">hive_tags</code><code data-desc="Read, append to, or replace the currently-open note in Obsidian. Requires REST.">hive_active</code>
         </div>
         <div class="chip-group">
           <span class="grp-label">retrieval &amp; knowledge-health</span>
-          <code data-desc="Hybrid composite-score + dense-vector retrieval with re-ranking.">vault_retrieve</code><code data-desc="Compute knowledge health metrics: K, I(t), delta, sigma, rho, phi, escape velocity, dK/dt.">vault_health</code><code data-desc="Pre-session context loader: surfaces relevant vault knowledge at session start.">vault_context</code><code data-desc="Post-session validation: checks that knowledge was persisted properly.">vault_session_check</code><code data-desc="Record whether retrieved notes were actually helpful (MemRL feedback).">vault_feedback</code><code data-desc="Compute true sigma and rho from MemRL feedback data.">vault_sigma_rho</code><code data-desc="Dry-run prune scan: count candidates by category without moving anything.">vault_prune_dryrun</code><code data-desc="Check for unmined sessions that should be processed for knowledge extraction.">vault_unmined_sessions</code>
+          <code data-desc="Hybrid RRF-fused keyword + dense retrieval with MemRL re-ranking. granularity: note|chunk for section-anchored hits; detail: minimal|standard|full.">hive_retrieve</code><code data-desc="Compute knowledge health metrics: K, I(t), delta, sigma, rho, phi, escape velocity, dK/dt.">hive_health</code><code data-desc="One-shot pre-session context pack: project memory + scored hits + top-hit neighbors + a logged retrievalId.">hive_context</code><code data-desc="Post-session validation: checks that knowledge was persisted properly.">hive_session_check</code><code data-desc="Record whether retrieved notes were actually helpful (MemRL feedback).">hive_feedback</code><code data-desc="Compute true sigma and rho from MemRL feedback data.">hive_sigma_rho</code><code data-desc="Dry-run prune scan: count candidates by category without moving anything.">hive_prune_dryrun</code><code data-desc="Check for unmined sessions that should be processed for knowledge extraction.">hive_unmined_sessions</code>
         </div>
         <div class="chip-group">
           <span class="grp-label">write</span>
-          <code data-desc="Mid-session incremental project memory update.">vault_checkpoint</code><code data-desc="Surgical heading/block/frontmatter edit via REST PATCH. Requires REST.">vault_patch</code><code data-desc="Daily/weekly/monthly/quarterly/yearly note CRUD. Requires REST.">vault_periodic</code><code data-desc="List or run Obsidian commands. Requires REST.">vault_command</code><code data-desc="Bring a note into focus in the Obsidian UI. Requires REST.">vault_open</code>
+          <code data-desc="Mid-session incremental project memory update.">hive_checkpoint</code><code data-desc="Surgical heading/block/frontmatter edit via REST PATCH. Requires REST.">hive_patch</code><code data-desc="Daily/weekly/monthly/quarterly/yearly note CRUD. Requires REST.">hive_periodic</code><code data-desc="List or run Obsidian commands. Requires REST.">hive_command</code><code data-desc="Bring a note into focus in the Obsidian UI. Requires REST.">hive_open</code>
         </div>
       </div>
 
@@ -247,15 +252,15 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
         </div>
         <div class="chip-group">
           <span class="grp-label">retrieval &amp; feedback</span>
-          <code data-desc="Structured vault retrieval with relevance ranking.">recall</code><code data-desc="Composite-scored vault retrieval with MemRL utility weighting.">retrieve</code><code data-desc="Record whether retrieved vault notes were helpful (MemRL feedback loop).">feedback</code><code data-desc="Compute true sigma and rho from MemRL feedback data.">sigma-rho</code>
+          <code data-desc="Structured hive retrieval with relevance ranking.">recall</code><code data-desc="Composite-scored hive retrieval with MemRL utility weighting.">retrieve</code><code data-desc="Record whether retrieved hive notes were helpful (MemRL feedback loop).">feedback</code><code data-desc="Compute true sigma and rho from MemRL feedback data.">sigma-rho</code>
         </div>
         <div class="chip-group">
           <span class="grp-label">knowledge health</span>
-          <code data-desc="Quick knowledge health metrics from the knowledge compounding equation.">health</code><code data-desc="Quick vault health scan for orphan notes, broken links, missing frontmatter, and stale content.">health-check</code><code data-desc="Archive stale notes, clean completed items, and maintain vault scale — the remediation half of health-check.">prune</code><code data-desc="Fix broken wikilinks, link orphan notes to MOCs, and repair escape-character bugs.">link-repair</code>
+          <code data-desc="Quick knowledge health metrics from the knowledge compounding equation.">health</code><code data-desc="Quick hive health scan for orphan notes, broken links, missing frontmatter, and stale content.">health-check</code><code data-desc="Archive stale notes, clean completed items, and maintain hive scale — the remediation half of health-check.">prune</code><code data-desc="Fix broken wikilinks, link orphan notes to MOCs, and repair escape-character bugs.">link-repair</code>
         </div>
         <div class="chip-group">
           <span class="grp-label">intelligence &amp; evolution</span>
-          <code data-desc="Propose structural improvements to the vault and propagate captured learnings into operational surfaces (skills, rules, hooks).">evolve</code><code data-desc="Find cross-domain connections and synthesis opportunities between notes.">connect</code><code data-desc="Extended reasoning for complex decisions — gathers context, reasons deeply, and persists the thinking chain.">think-deep</code><code data-desc="Generate a 'State of the Vault' assessment of what's working, what's decaying, and what to do next.">weekly-review</code>
+          <code data-desc="Propose structural improvements to the hive and propagate captured learnings into operational surfaces (skills, rules, hooks).">evolve</code><code data-desc="Find cross-domain connections and synthesis opportunities between notes.">connect</code><code data-desc="Extended reasoning for complex decisions — gathers context, reasons deeply, and persists the thinking chain.">think-deep</code><code data-desc="Generate a 'State of the Hive' assessment of what's working, what's decaying, and what to do next.">weekly-review</code>
         </div>
         <div class="chip-group">
           <span class="grp-label">capture</span>
@@ -263,7 +268,7 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
         </div>
         <div class="chip-group">
           <span class="grp-label">engineering</span>
-          <code data-desc="Design project scaffolds, directory hierarchies, and naming conventions — or audit and reorganize existing codebases.">frame</code><code data-desc="Pre-task discipline for coding work: think before coding, simplicity first, surgical changes, goal-driven execution.">execute</code><code data-desc="Generate a comprehensive, research-backed README.md for any project by analyzing the codebase.">readme</code>
+          <code data-desc="Design project scaffolds, directory hierarchies, and naming conventions — or audit and reorganize existing codebases.">frame</code><code data-desc="Pre-task discipline for coding work: think before coding, simplicity first, surgical changes, goal-driven execution.">execute</code><code data-desc="Generate a comprehensive, research-backed README.md for any project by analyzing the codebase.">readme</code><code data-desc="LLM application playbook: RAG, agents, prompt/context engineering, tool use, structured outputs, evals. Pairs with the ai-engineer subagent.">ai-engineer</code>
         </div>
       </div>
 
@@ -290,10 +295,10 @@ utility ← (1 − α)·utility + α·reward      # α = 0.3</code></pre>
       <button class="copy" type="button" aria-label="Copy code">copy</button>
       <pre><code>cd _meta/mcp-server-py
 uv sync --extra dev
-uv run pytest -q          # 64 tests (73 with the optional ONNX extra)
+uv run pytest -q          # 207 tests (+2 ONNX-gated skips)
 
-# point engram at a vault (defaults to ~/vault)
-export VAULT_PATH="$(git rev-parse --show-toplevel)"</code></pre>
+# point hivemind at a hive (defaults to this repo)
+export HIVE_PATH="$(git rev-parse --show-toplevel)"</code></pre>
     </figure>
 
     <figure class="code reveal" style="--d:1">
@@ -301,8 +306,8 @@ export VAULT_PATH="$(git rev-parse --show-toplevel)"</code></pre>
       <button class="copy" type="button" aria-label="Copy code">copy</button>
       <pre><code>uv sync --extra embeddings
 uv run --extra embeddings python scripts/fetch-embedding-model.py
-export ENGRAM_EMBEDDINGS_BACKEND=onnx
-export ENGRAM_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2</code></pre>
+export HIVEMIND_EMBEDDINGS_BACKEND=onnx
+export HIVEMIND_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2</code></pre>
     </figure>
 
     <p class="qs-note reveal">A dependency-free hashing backend works out of the box. Drop the ONNX model in for real semantic retrieval. Live two-way sync with Obsidian is optional via the Local REST API.</p>
@@ -326,39 +331,39 @@ export ENGRAM_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2</code></pre>
     <div class="band-head reveal">
       <span class="kicker">07 — credits &amp; prior art</span>
       <h2>Built on AgentOps' science.</h2>
-      <p class="band-sub">engram's knowledge-compounding model — the <code>σ·ρ &gt; δ/100</code> escape-velocity thesis, the σ/ρ/δ terms, the MemRL utility loop, the 40% context rule — is adapted from <a href="https://boshu2.github.io/agentops/the-science/">AgentOps · <em>The Science</em></a> by <a href="https://github.com/boshu2/agentops">boshu2</a> (Apache-2.0). engram is an independent implementation — it includes no AgentOps code.</p>
+      <p class="band-sub">hivemind's knowledge-compounding model — the <code>σ·ρ &gt; δ/100</code> escape-velocity thesis, the σ/ρ/δ terms, the MemRL utility loop, the 40% context rule — is adapted from <a href="https://boshu2.github.io/agentops/the-science/">AgentOps · <em>The Science</em></a> by <a href="https://github.com/boshu2/agentops">boshu2</a> (Apache-2.0). hivemind is an independent implementation — it includes no AgentOps code.</p>
     </div>
     <ul class="credits-list reveal">
       <li><span class="src">AgentOps · The Science</span> — the compounding model, escape velocity, σ/ρ/δ, and the MemRL framing. <a href="https://boshu2.github.io/agentops/the-science/">the-science</a> · <a href="https://github.com/boshu2/agentops">repository</a></li>
       <li><span class="src">Ebbinghaus (1885)</span> — <em>Memory: A Contribution to Experimental Psychology.</em> The forgetting curve; the basis for treating knowledge as decaying (δ).</li>
       <li><span class="src">Darr, Argote &amp; Epple (1995)</span> — "The Acquisition, Transfer, and Depreciation of Knowledge in Service Organizations," <em>Management Science.</em> Source of the ~17%/week decay rate.</li>
       <li><span class="src">Liu et al. (2023)</span> — "Lost in the Middle: How Language Models Use Long Contexts." <a href="https://arxiv.org/abs/2307.03172">arXiv:2307.03172</a>. Long-context utilization — the 40% rule.</li>
-      <li><span class="src">MemRL (2026)</span> — "Self-Evolving Agents via Runtime Reinforcement Learning on Episodic Memory." <a href="https://arxiv.org/abs/2601.03192">arXiv:2601.03192</a>. Two-phase retrieval (semantic filter → learned utility) — engram's fusion → MemRL re-rank mirrors it.</li>
+      <li><span class="src">MemRL (2026)</span> — "Self-Evolving Agents via Runtime Reinforcement Learning on Episodic Memory." <a href="https://arxiv.org/abs/2601.03192">arXiv:2601.03192</a>. Two-phase retrieval (semantic filter → learned utility) — hivemind's fusion → MemRL re-rank mirrors it.</li>
     </ul>
-    <p class="qs-note reveal">Full attribution and the complete reference list live in <a href="https://github.com/alexiagnocco/engram/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    <p class="qs-note reveal">Full attribution and the complete reference list live in <a href="https://github.com/alexiagnocco/hivemind/blob/main/CREDITS.md">CREDITS.md</a>.</p>
   </section>
 </main>
 
 <footer class="foot">
   <div class="foot-inner">
     <div class="foot-brand">
-      <span class="brand"><span>engram</span></span>
+      <span class="brand"><span>hivemind</span></span>
       <p>A knowledge-compounding engine for AI agent memory.</p>
     </div>
     <nav class="foot-links" aria-label="Footer">
       <a href="#engine">The engine</a>
       <a href="#architecture">Architecture</a>
       <a href="#quickstart">Quick start</a>
-      <a href="https://github.com/alexiagnocco/engram">Source on GitHub ↗</a>
+      <a href="https://github.com/alexiagnocco/hivemind">Source on GitHub ↗</a>
     </nav>
   </div>
   <div class="foot-base">
     <span>σ · ρ &gt; δ / 100</span>
-    <span>MIT licensed · built with Claude Code</span>
+    <span>MIT licensed · built with Claude Code · <em>Stranger Things</em> is a Netflix production — this naming is fan homage, not affiliation</span>
   </div>
-  <p class="foot-credit">Knowledge-compounding model adapted from <a href="https://boshu2.github.io/agentops/the-science/">AgentOps · The Science</a> (boshu2, Apache-2.0) · <a href="https://github.com/alexiagnocco/engram/blob/main/CREDITS.md">Credits</a></p>
+  <p class="foot-credit">Knowledge-compounding model adapted from <a href="https://boshu2.github.io/agentops/the-science/">AgentOps · The Science</a> (boshu2, Apache-2.0) · <a href="https://github.com/alexiagnocco/hivemind/blob/main/CREDITS.md">Credits</a></p>
 </footer>
 
-<script src="main.js?v=3" defer></script>
+<script src="main.js?v=4" defer></script>
 </body>
 </html>

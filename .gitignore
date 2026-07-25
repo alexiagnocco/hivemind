@@ -14,10 +14,12 @@ build/
 # Downloaded embedding models (provisioned on demand, never committed)
 _meta/mcp-server-py/models/
 
-# Engram runtime / derived data (regenerated; not source)
-_meta/vault-manifest.json
-_meta/vault-embeddings.json
-_meta/vault-embeddings.json.tmp
+# Hivemind runtime / derived data (regenerated; not source)
+_meta/hive-manifest.json
+_meta/hive-embeddings.json
+_meta/hive-embeddings.json.tmp
+_meta/hive-chunks.json
+_meta/hive-chunks.json.tmp
 _meta/utility-scores.json
 _meta/feedback-log.jsonl
 _meta/session-activity.log

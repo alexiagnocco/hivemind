@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from engram.scoring.embeddings import HashingEmbeddingBackend
-from engram.state.embedding_store import EmbeddingStore
+from hivemind.scoring.embeddings import HashingEmbeddingBackend
+from hivemind.state.embedding_store import EmbeddingStore
 
 
 class CountingBackend:
@@ -31,7 +31,7 @@ def test_index_returns_vector_per_note(tmp_path, make_note) -> None:
 def test_persists_to_disk(tmp_path, make_note) -> None:
     backend = HashingEmbeddingBackend(dim=16)
     EmbeddingStore(tmp_path, backend).index([make_note("a.md", title="alpha")])
-    assert (tmp_path / "_meta" / "vault-embeddings.json").is_file()
+    assert (tmp_path / "_meta" / "hive-embeddings.json").is_file()
 
 
 def test_reload_skips_recompute(tmp_path, make_note) -> None:

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Provision a local ONNX sentence-transformer for engram dense retrieval.
+"""Provision a local ONNX sentence-transformer for hivemind dense retrieval.
 
 Downloads an ONNX-exported sentence-transformer (default
 ``sentence-transformers/all-MiniLM-L6-v2``, 384-dim) and its tokenizer into a
 local directory. Model weights are NOT committed to the vault — this script
 fetches them on demand. Point the server at the result via:
 
-    ENGRAM_EMBEDDINGS_BACKEND=onnx
-    ENGRAM_EMBEDDINGS_MODEL_DIR=/abs/path/to/models/all-MiniLM-L6-v2
+    HIVEMIND_EMBEDDINGS_BACKEND=onnx
+    HIVEMIND_EMBEDDINGS_MODEL_DIR=/abs/path/to/models/all-MiniLM-L6-v2
 
 Usage:
     uv run --extra embeddings python scripts/fetch-embedding-model.py \
@@ -72,7 +72,7 @@ def main() -> int:
         )
         return 2
 
-    print(f"\nDone. Set ENGRAM_EMBEDDINGS_MODEL_DIR={out_dir}")
+    print(f"\nDone. Set HIVEMIND_EMBEDDINGS_MODEL_DIR={out_dir}")
     return 0
 
 

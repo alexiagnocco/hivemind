@@ -25,7 +25,7 @@ Execute each phase in order. If a phase has nothing to do (e.g., no learnings to
 | `--quick` | 2 → 3 → 3.5 → 4 → 4.5 → 5 → 6 |
 | `--light` | 4 → 5 → 6 |
 
-Use `--light` for sessions under ~10 turns where there's nothing meaningful to retrospect and no vault notes were retrieved. The handoff (Phase 4) always runs because session continuity is non-negotiable.
+Use `--light` for sessions under ~10 turns where there's nothing meaningful to retrospect and no hive notes were retrieved. The handoff (Phase 4) always runs because session continuity is non-negotiable.
 
 ### Phase 1: Retro (skip with `--quick` or `--light`)
 
@@ -34,23 +34,23 @@ Check if the session produced learnings worth capturing:
 - Were there decisions with rationale that should be preserved?
 - Were there surprises or failures that teach something?
 
-If yes: persist each learning to the vault using the `/retro` skill's logic (search before creating, append when possible, create `30-resources/<domain>/` notes with frontmatter and links).
+If yes: persist each learning to the hive using the `/retro` skill's logic (search before creating, append when possible, create `30-resources/<domain>/` notes with frontmatter and links).
 
 If no: skip silently. Not every session produces novel learnings.
 
 ### Phase 2: Feedback (skip with `--light`)
 
 Run `/feedback --session` logic:
-1. Check the session activity log for notes retrieved via `vault_retrieve` or `vault_search` this session.
+1. Check the session activity log for notes retrieved via `hive_retrieve` or `hive_search` this session.
 2. For each retrieved note, determine if it was subsequently cited (referenced in created/edited files) or ignored.
-3. Call `vault_feedback` for each batch: cited = helpful, ignored = not helpful.
+3. Call `hive_feedback` for each batch: cited = helpful, ignored = not helpful.
 4. Report count: "Recorded N feedback events."
 
 If no notes were retrieved this session, skip silently.
 
 ### Phase 3: Session Check (skip with `--light`)
 
-Run `vault_session_check` to validate knowledge persistence:
+Run `hive_session_check` to validate knowledge persistence:
 - Were new notes created with proper frontmatter?
 - Were orphan notes left without inbound links?
 - Was project memory updated?
@@ -59,7 +59,7 @@ Report any gaps but do NOT block on them — just note them for awareness.
 
 ### Phase 3.5: Prune Pulse (read-only, skip with `--light`)
 
-Call the `vault_prune_dryrun` MCP tool to get candidate counts by category. Do NOT execute any moves, do NOT prompt for decisions, do NOT list every candidate. The goal is awareness, not action.
+Call the `hive_prune_dryrun` MCP tool to get candidate counts by category. Do NOT execute any moves, do NOT prompt for decisions, do NOT list every candidate. The goal is awareness, not action.
 
 Report a single line:
 
@@ -67,13 +67,13 @@ Report a single line:
 Prune pulse: N candidates (S stale, C completed, E empty, I inbox, M meta) — run /prune to triage
 ```
 
-If N is 0, report "Prune pulse: clean" and move on. If `vault_prune_dryrun` errors or engram is unavailable, skip silently — wrap should never fail because of a read-only check.
+If N is 0, report "Prune pulse: clean" and move on. If `hive_prune_dryrun` errors or hivemind is unavailable, skip silently — wrap should never fail because of a read-only check.
 
 ### Phase 4: Handoff
 
 Run `/handoff` logic:
 1. Review session: files changed, decisions made, open questions.
-2. Determine project from `pwd` (or vault context).
+2. Determine project from `pwd` (or hive context).
 3. Append session handoff to `memory/projects/<project>.md` with: What Was Done, Decisions Made, In Progress, Open Questions, Next Session Start.
 4. Update `updated:` field.
 
@@ -85,7 +85,7 @@ Validate the current project's CLAUDE.md against the actual filesystem and proje
 
 - **Primary:** `CLAUDE.md` in the current working directory (`pwd`).
 - **Secondary:** `CLAUDE.md` in any additional working directories touched this session.
-- **Skip:** global `CLAUDE.md` files and the vault's own `CLAUDE.md` — these are managed separately.
+- **Skip:** global `CLAUDE.md` files and the hive's own `CLAUDE.md` — these are managed separately.
 
 If no `CLAUDE.md` exists in scope, skip silently.
 
@@ -121,7 +121,7 @@ If any filesystem check fails or an Edit call errors, log the failure in the Pha
 - Add new sections or missing content — that's a separate doc-improvement pass.
 - Restructure, reformat, or improve prose.
 - Apply quality scoring or grades.
-- Touch global or vault CLAUDE.md files.
+- Touch global or hive CLAUDE.md files.
 
 ### Phase 5: Commit
 
@@ -130,7 +130,7 @@ If any filesystem check fails or an Edit call errors, log the failure in the Pha
 3. Commit with a descriptive message + co-author line.
 4. `git push origin HEAD`.
 
-**Vault rebase safety:** if the vault remote has diverged and `git pull --rebase` is needed, never use `git stash -u`. The PreToolUse `pre-bash-vault-stash-guard.sh` hook hard-blocks `git stash drop` inside the vault; if you hit it, commit WIP before the pull instead of stashing.
+**Hive rebase safety:** if the hive remote has diverged and `git pull --rebase` is needed, never use `git stash -u`. The PreToolUse `pre-bash-hive-stash-guard.sh` hook hard-blocks `git stash drop` inside the hive; if you hit it, commit WIP before the pull instead of stashing.
 
 ### Phase 6: Exit
 
@@ -154,6 +154,6 @@ Then tell the user the session is complete and they can close the window or star
 - **Never ask for confirmation** between phases. The whole point is one-command shutdown.
 - **Never skip handoff** — it's the most important phase for session continuity.
 - **Never force push** — if push fails, report the error in the summary.
-- **If the vault has no changes and no learnings**, the summary should reflect that honestly: "Clean session — nothing to persist."
+- **If the hive has no changes and no learnings**, the summary should reflect that honestly: "Clean session — nothing to persist."
 - **Keep each phase concise** — this is a shutdown sequence, not a deep analysis. Retro captures should be quick notes, not full retrospectives.
 - **Always end with the summary block** — it's the user's confirmation that everything ran.

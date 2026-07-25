@@ -12,21 +12,21 @@ Compute knowledge health metrics from the knowledge compounding equation. This i
 
 ## Behavior
 
-1. **Compute** — Call `vault_health` with window_days (default 7) and stale_threshold_days (default 30).
+1. **Compute** — Call `hive_health` with window_days (default 7) and stale_threshold_days (default 30).
 2. **Display metrics**:
    - **K** (knowledge stock): total active, linked, non-stale notes
    - **I(t)** (input rate): notes created/modified in the measurement window
    - **delta** (decay rate): fraction of notes going stale
    - **sigma** (retrieval coverage): fraction of notes reachable via search/links
    - **rho** (retrieval precision): fraction of retrieved notes with citations
-   - **phi** (scale factor): diminishing returns as vault grows
+   - **phi** (scale factor): diminishing returns as hive grows
    - **Escape velocity**: sigma * rho > delta/100 — is knowledge compounding?
    - **dK/dt estimate**: net knowledge growth rate
 3. **Interpret** — Traffic light status:
    - THRIVING: escape velocity met, positive dK/dt
    - STABLE: escape velocity met, flat dK/dt
    - DECAYING: below escape velocity, negative dK/dt
-4. **Compare** — If previous health data exists in `_meta/vault-health.md`, show trend arrows.
+4. **Compare** — If previous health data exists in `_meta/hive-health.md`, show trend arrows.
 
 ## vs /health-check
 
@@ -39,4 +39,4 @@ Compute knowledge health metrics from the knowledge compounding equation. This i
 
 ## MCP Tool
 
-Primary: `vault_health`
+Primary: `hive_health`

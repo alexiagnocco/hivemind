@@ -1,11 +1,11 @@
 ---
 name: think-deep
-description: "Extended reasoning for complex decisions — gathers vault context, reasons deeply, and persists the thinking chain"
+description: "Extended reasoning for complex decisions — gathers hive context, reasons deeply, and persists the thinking chain"
 ---
 
 # /think-deep — Extended Reasoning
 
-Explicit deep reasoning for complex decisions. Gathers vault context, structures the decision space, evaluates options systematically, and persists the full reasoning chain as a permanent vault note. The thinking itself becomes knowledge.
+Explicit deep reasoning for complex decisions. Gathers hive context, structures the decision space, evaluates options systematically, and persists the full reasoning chain as a permanent hive note. The thinking itself becomes knowledge.
 
 ## Usage
 
@@ -20,8 +20,8 @@ This skill explicitly benefits from extended thinking. If not already in plan mo
 
 1. **Check complexity** — if the question has a single clear answer with no meaningful tradeoffs, say so and suggest a lighter approach (`/recall` or a direct answer). Don't force deep analysis on simple questions.
 
-2. **Gather context** — search the vault before reasoning (never start from scratch):
-   - `vault_search` for notes mentioning the topic, decision keywords, and relevant domain terms
+2. **Gather context** — search the hive before reasoning (never start from scratch):
+   - `hive_search` for notes mentioning the topic, decision keywords, and relevant domain terms
    - Read `memory/projects/<project>.md` if `--project` is specified or project is inferrable
    - Search `_meta/architecture-log.md` for related architectural decisions
    - Search `10-projects/` for ADRs that constrain the decision space
@@ -30,16 +30,16 @@ This skill explicitly benefits from extended thinking. If not already in plan mo
 
 3. **Frame the question** — structure the decision before analyzing it:
    - **Decision:** What specifically needs to be decided? (one sentence, precise)
-   - **Context:** What does the vault already know about this? (cite notes with [[wikilinks]])
+   - **Context:** What does the hive already know about this? (cite notes with [[wikilinks]])
    - **Constraints:** What limits the options? (from ADRs, architecture decisions, project realities)
    - **Options:** What are the viable paths? (minimum 2, typically 3-4)
-   - **Criteria:** What matters most? (derived from project goals and vault patterns)
+   - **Criteria:** What matters most? (derived from project goals and hive patterns)
 
 4. **Reason deeply** — for each option, analyze across five dimensions:
    - **Pros:** What does this option enable? What value does it create?
    - **Cons:** What does this option cost, prevent, or make harder?
    - **Risks:** What could go wrong? Draw on past retros, anti-patterns, and pre-mortem thinking.
-   - **Precedent:** Have we made similar decisions before? What happened? Cite vault notes.
+   - **Precedent:** Have we made similar decisions before? What happened? Cite hive notes.
    - **Second-order effects:** What does this decision unlock or block downstream? What future options does it preserve or foreclose?
 
 5. **Synthesize recommendation** — converge on a clear position:
@@ -48,7 +48,7 @@ This skill explicitly benefits from extended thinking. If not already in plan mo
    - Reversibility conditions — what would change the recommendation
    - Specific next action if recommendation is accepted
 
-6. **Persist to vault** — create a decision note based on the question type:
+6. **Persist to hive** — create a decision note based on the question type:
    - **Architectural decision:** `10-projects/<project>/ADR-NNN-<title>.md` with `type: decision`, `decision: accepted` (or `draft` if awaiting approval)
    - **Analytical question:** `30-resources/<domain>/<topic>-analysis.md` with `type: reference`
    - **Cross-domain synthesis:** `30-resources/synthesis/<topic>.md` with `type: note`, tag `#synthesis`
@@ -65,7 +65,7 @@ This skill explicitly benefits from extended thinking. If not already in plan mo
 ## Deep Analysis: <question>
 
 ### Context Loaded
-- <N> vault notes consulted
+- <N> hive notes consulted
 - Key constraints: <list from ADRs and architecture decisions>
 - Prior art: [[relevant-note-1]], [[relevant-note-2]]
 
@@ -83,7 +83,7 @@ This skill explicitly benefits from extended thinking. If not already in plan mo
 
 ### Deep Reasoning
 <Full reasoning chain for each option — this is the deliverable.
-Reference vault notes with [[wikilinks]]. Cite precedent.
+Reference hive notes with [[wikilinks]]. Cite precedent.
 Explore second-order effects. This section should be thorough.>
 
 ### Recommendation
@@ -105,7 +105,7 @@ Persisted to: [[<note-path>]]
 
 ## Confidence Levels
 
-- **High (>80%):** Clear precedent in the vault, strong alignment with existing patterns, low uncertainty. One option is clearly better.
+- **High (>80%):** Clear precedent in the hive, strong alignment with existing patterns, low uncertainty. One option is clearly better.
 - **Medium (60-80%):** Some uncertainty remains, tradeoffs are real but one option edges ahead. More information could shift the balance.
 - **Low (<60%):** Genuine tradeoffs, limited precedent, significant unknowns. The recommendation is a lean, not a conviction. Flag what information would increase confidence.
 
@@ -113,17 +113,17 @@ Persisted to: [[<note-path>]]
 
 When invoked with `--compare "Option A vs Option B"`:
 - Skip the option discovery step — the user has already scoped the comparison
-- Still search vault for context on both options
+- Still search hive for context on both options
 - Give each option equal analytical depth (avoid anchoring on the first option listed)
-- Explicitly state if there are options the user hasn't considered that vault context suggests
+- Explicitly state if there are options the user hasn't considered that hive context suggests
 
 ## Rules
 
-- Always load vault context first — never reason from scratch (prevents session amnesia)
+- Always load hive context first — never reason from scratch (prevents session amnesia)
 - Minimum 2 options analyzed — avoid confirmation bias even if one seems obvious
 - Include at least one "what would change this" condition — decisions should be reversible
 - The reasoning chain IS the deliverable — persist the full thinking, not a summary
 - Reference prior decisions with [[wikilinks]] to build the decision graph over time
 - If `--project` is given, scope context loading and note placement to that project
-- End with Recommended Next Steps (mandatory per vault operating rules)
+- End with Recommended Next Steps (mandatory per hive operating rules)
 - Do not auto-execute the recommendation — present it for human decision
