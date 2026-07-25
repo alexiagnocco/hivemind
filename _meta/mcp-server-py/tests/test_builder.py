@@ -1,15 +1,18 @@
-"""Tests for the manifest builder's vault walk.
+"""Tests for the manifest builder's hive walk.
 
 Locks in two boundaries: tool caches (.pytest_cache) are never indexed,
-while the .github Copilot surface IS indexed — is_system_note handles its
+while the .github repo surface IS indexed — is_system_note handles its
 metrics classification, not walk exclusion (see test_paths.py).
 """
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from hivemind.manifest.builder import build_manifest
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def _write(root: Path, rel: str, text: str = "# Note\n\nbody\n") -> None:
