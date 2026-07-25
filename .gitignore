@@ -16,6 +16,12 @@ _meta/mcp-server-py/models/
 
 # Hivemind runtime / derived data (regenerated; not source)
 _meta/hive-manifest.json
+# Legacy engram-era names — keep ignored so stale caches never get committed
+_meta/vault-manifest.json
+_meta/vault-embeddings.json
+_meta/vault-embeddings.json.tmp
+_meta/vault-chunks.json
+_meta/vault-chunks.json.tmp
 _meta/hive-embeddings.json
 _meta/hive-embeddings.json.tmp
 _meta/hive-chunks.json
