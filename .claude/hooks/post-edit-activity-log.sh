@@ -7,7 +7,7 @@
 
 set -u
 
-VAULT_ROOT="${VAULT_PATH:-$HOME/vault}"
+VAULT_ROOT="${VAULT_PATH:-${CLAUDE_PROJECT_DIR:-$HOME/vault}}"
 LOG="$VAULT_ROOT/_meta/session-activity.log"
 
 INPUT="$(cat)"

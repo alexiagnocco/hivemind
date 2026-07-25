@@ -40,7 +40,7 @@ These compose to make a generic AI coding agent operate the vault. Each has a no
 ```text
 .claude/
 ├── skills/        21 slash-command workflows (+ an eval harness)
-├── hooks/         14 lifecycle automation scripts
+├── hooks/         15 lifecycle automation scripts
 ├── rules/         8 always-on behavioral rules
 ├── agents/        2 subagent definitions
 └── settings.json  wires each hook to its lifecycle event

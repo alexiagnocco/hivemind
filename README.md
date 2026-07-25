@@ -214,10 +214,11 @@ Per-note vectors are cached incrementally (keyed by content hash, gitignored); o
 # 1. Install the MCP server (Python 3.12 + uv)
 cd _meta/mcp-server-py
 uv sync --extra dev
-uv run pytest -q          # 62 tests (71 with the optional ONNX extra)
+uv run pytest -q          # 64 tests (73 with the optional ONNX extra)
 
-# 2. Point engram at your knowledge vault (defaults to ~/vault)
-export VAULT_PATH="$(git rev-parse --show-toplevel)"   # e.g. this repo
+# 2. (optional) point engram at your own vault — the launch wrapper
+#    defaults VAULT_PATH to this repository, which is itself a vault
+export VAULT_PATH="$HOME/my-vault"
 
 # 3. Register the server with Claude Code
 #    .mcp.json in the repo root already declares the `engram` server.
@@ -236,6 +237,21 @@ export ENGRAM_EMBEDDINGS_BACKEND=onnx
 export ENGRAM_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2
 ```
 
+The launch wrapper auto-detects fetched weights at `models/all-MiniLM-L6-v2/`, so the two exports are only needed for a non-default location. Without weights the server boots on the dependency-free hashing backend — `vault_status` always reports which backend is live.
+
+## Run it remotely
+
+Open this repository in [Claude Code on the web](https://claude.ai/code) and the platform provisions itself — no local setup. A `SessionStart` hook ([`.claude/hooks/session-provision.sh`](.claude/hooks/session-provision.sh)) runs on the session's first boot:
+
+1. **Dependencies** — `uv sync` installs the server (dev + embeddings extras).
+2. **Index** — the vault manifest is built, so retrieval over the seeded corpus works from the first prompt.
+3. **Embeddings** — the MiniLM ONNX weights are fetched if the environment's network policy allows; otherwise the server boots on the deterministic hashing backend. Either way `vault_status` reports the active backend — the fallback chain is itself a live demo of the backend-observability design.
+4. **Smoke test** — a real JSON-RPC session is driven over stdio (initialize → tools/list → status → retrieve → health) and the verdict lands in the session context.
+
+Then take the same five-minute path as above: ask for a retrieval over the corpus, run `/health`, run `/connect`.
+
+A note on the smoke-test client ([`scripts/stdio-smoke.py`](_meta/mcp-server-py/scripts/stdio-smoke.py)): it holds stdin open until every expected response has been read. stdio MCP servers begin shutdown on stdin EOF and cancel in-flight tool calls, so a one-shot shell pipe (`printf ... | server`) silently drops slow calls — the failure masquerades as a broken tool. If you script your own harness against the server, keep stdin open.
+
 ---
 
 ## Repository layout
@@ -244,12 +260,12 @@ export ENGRAM_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2
 engram/
 ├── .claude/
 │   ├── skills/        21 slash-command workflows (+ an eval harness)
-│   ├── hooks/         14 lifecycle automation scripts
+│   ├── hooks/         15 lifecycle automation scripts
 │   ├── rules/         8 always-on behavioral rules
 │   ├── agents/        2 subagent definitions
 │   └── settings.json  wires hooks to lifecycle events
 ├── _meta/
-│   ├── mcp-server-py/ the engram MCP server (Python / FastMCP, 68 tests)
+│   ├── mcp-server-py/ the engram MCP server (Python / FastMCP, 73 tests)
 │   └── scripts/       standalone vault utilities
 ├── docs/              the documentation website (bespoke static site → GitHub Pages)
 ├── .github/workflows/ CI (ruff + pytest) and Pages deploy

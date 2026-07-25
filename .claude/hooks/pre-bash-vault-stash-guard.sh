@@ -25,7 +25,7 @@ if ! printf '%s' "$NORMALISED" | grep -qE '(^|[; &|])git stash drop($| |;|&|\|)'
 fi
 
 # Only block when cwd is under the vault root. Outside it, stash drop is fine.
-VAULT_ROOT="${VAULT_PATH:-$HOME/vault}"
+VAULT_ROOT="${VAULT_PATH:-${CLAUDE_PROJECT_DIR:-$HOME/vault}}"
 case "$CWD" in
   "$VAULT_ROOT"|"$VAULT_ROOT"/*) ;;
   *) exit 0 ;;
