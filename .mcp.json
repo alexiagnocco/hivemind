@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "engram": {
+    "hivemind": {
       "command": "bash",
       "args": ["_meta/mcp-server-py/scripts/launch.sh"]
     }

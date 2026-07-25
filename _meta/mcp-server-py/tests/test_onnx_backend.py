@@ -15,7 +15,7 @@ import pytest
 pytest.importorskip("onnxruntime")
 pytest.importorskip("tokenizers")
 
-from engram.scoring.embeddings import (
+from hivemind.scoring.embeddings import (
     OnnxEmbeddingBackend,
     cosine,
     get_embedding_backend,
@@ -77,9 +77,9 @@ def test_factory_uses_onnx_when_model_dir_valid() -> None:
     from types import SimpleNamespace
 
     settings = SimpleNamespace(
-        engram_embeddings_backend="onnx",
-        engram_embeddings_model_dir=str(FIXTURE),
-        engram_embeddings_dim=256,
+        hivemind_embeddings_backend="onnx",
+        hivemind_embeddings_model_dir=str(FIXTURE),
+        hivemind_embeddings_dim=256,
     )
     backend = get_embedding_backend(settings)
     assert isinstance(backend, OnnxEmbeddingBackend)

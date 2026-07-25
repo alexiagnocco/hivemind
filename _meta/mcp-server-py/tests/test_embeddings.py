@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from engram.scoring.embeddings import (
+from hivemind.scoring.embeddings import (
     HashingEmbeddingBackend,
     cosine,
     embed_text_for_note,
@@ -74,9 +74,9 @@ class TestFactory:
     @staticmethod
     def _settings(backend: str, *, model_dir: str = "", dim: int = 128) -> SimpleNamespace:
         return SimpleNamespace(
-            engram_embeddings_backend=backend,
-            engram_embeddings_model_dir=model_dir,
-            engram_embeddings_dim=dim,
+            hivemind_embeddings_backend=backend,
+            hivemind_embeddings_model_dir=model_dir,
+            hivemind_embeddings_dim=dim,
         )
 
     def test_none_disables(self) -> None:

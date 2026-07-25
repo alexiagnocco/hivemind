@@ -1,7 +1,7 @@
 """Unit tests for build_status_response — the embedding_backend field.
 
 Covers the three states an operator must be able to distinguish from
-``vault_status`` output: a real semantic backend (onnx), the lexical hashing
+``hive_status`` output: a real semantic backend (onnx), the lexical hashing
 fallback, and dense retrieval disabled entirely (null). These are pure unit
 tests against build_status_response — no FastMCP machinery required.
 """
@@ -13,10 +13,10 @@ from types import SimpleNamespace
 
 import pytest
 
-from engram.config import Settings
-from engram.rest.connection import ConnectionState
-from engram.scoring.embeddings import HashingEmbeddingBackend
-from engram.tools.status import build_status_response
+from hivemind.config import Settings
+from hivemind.rest.connection import ConnectionState
+from hivemind.scoring.embeddings import HashingEmbeddingBackend
+from hivemind.tools.status import build_status_response
 
 
 def _monitor() -> SimpleNamespace:
@@ -32,9 +32,9 @@ def _monitor() -> SimpleNamespace:
 def _settings(tmp_path, *, backend_mode: str = "hashing") -> Settings:
     return Settings(
         obsidian_api_key="k",
-        vault_path=tmp_path,
-        engram_embeddings_backend=backend_mode,
-        engram_embeddings_dim=64,
+        hive_path=tmp_path,
+        hivemind_embeddings_backend=backend_mode,
+        hivemind_embeddings_dim=64,
     )
 
 
@@ -63,7 +63,7 @@ def test_onnx_backend_surfaced(tmp_path) -> None:
 
     # Deferred import: onnxruntime/tokenizers may be absent on a base dev
     # install; the importorskip calls above guard this at runtime.
-    from engram.scoring.embeddings import OnnxEmbeddingBackend
+    from hivemind.scoring.embeddings import OnnxEmbeddingBackend
 
     fixture_dir = pathlib.Path(__file__).parent / "fixtures" / "tiny-onnx"
     if not (fixture_dir / "model.onnx").is_file():

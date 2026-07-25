@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build vault-manifest.json from all markdown files in the Obsidian vault.
+"""Build hive-manifest.json from all markdown files in the Obsidian vault.
 
 Produces a rich index matching the MCP manifest builder:
 - Per-note metadata with frontmatter, links, previews
@@ -19,9 +19,9 @@ from pathlib import Path
 
 import yaml
 
-VAULT_PATH = os.environ.get("VAULT_PATH", str(Path(__file__).resolve().parents[2]))
+HIVE_PATH = os.environ.get("HIVE_PATH", str(Path(__file__).resolve().parents[2]))
 EXCLUDE_DIRS = {".git", ".obsidian", "_templates", "node_modules", ".claude", ".trash"}
-MANIFEST_PATH = os.path.join(VAULT_PATH, "_meta", "vault-manifest.json")
+MANIFEST_PATH = os.path.join(HIVE_PATH, "_meta", "hive-manifest.json")
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
 
 # --- Stop words (common English words to exclude from keyword index) ---
@@ -137,7 +137,7 @@ def detect_para_folder(rel_path: str) -> str:
 
 def build_manifest() -> dict:
     """Walk vault and build the rich manifest/index."""
-    vault = Path(VAULT_PATH)
+    vault = Path(HIVE_PATH)
     notes = {}          # path -> note metadata
     tag_index = defaultdict(list)
     domain_index = defaultdict(list)
@@ -151,7 +151,7 @@ def build_manifest() -> dict:
     for md_file in md_files:
         rel = md_file.relative_to(vault)
         parts = rel.parts
-        if any(p in EXCLUDE_DIRS or p.startswith(".") for p in parts):
+        if any((p in EXCLUDE_DIRS or p.startswith(".")) and p != ".github" for p in parts):
             continue
 
         try:
