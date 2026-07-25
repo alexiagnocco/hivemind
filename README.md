@@ -17,7 +17,9 @@
 
 ---
 
-engram pairs a Python MCP server that does **hybrid retrieval with a reinforcement-learning feedback loop** with a layered stack of skills, hooks, rules, and subagents that make an agent *retrieve before it acts, persist as it works, and learn what was actually useful*. It's a self-contained study in **agent memory** — retrieval, reinforcement learning, and orchestration — built to run on any MCP client.
+engram is a self-contained piece of **agent-platform infrastructure**: the memory and context layer that makes an AI coding agent measurably better with use. A Python MCP server does **hybrid retrieval with a reinforcement-learning feedback loop**; a layered stack of skills, hooks, rules, and subagent patterns makes the agent *retrieve before it acts, persist as it works, and learn what was actually useful*; and the whole loop is instrumented — retrieval coverage, precision, and knowledge health are measured quantities here, not vibes. It runs on any MCP client.
+
+The vault ships **seeded with a 53-note demo corpus** on agent-platform engineering — agent loop design, MCP server and gateway patterns, evaluation and observability, reliability guardrails — so retrieval ranking, the link graph, MOCs, and health metrics all demo against realistic content the moment you clone. Every seeded note is labeled `seed: demo` and disclosed as synthetic in [`30-resources/demo-corpus-readme.md`](30-resources/demo-corpus-readme.md); the corpus doubles as a readable tour of the engineering thinking behind the system itself.
 
 The thesis in one line:
 
@@ -222,6 +224,8 @@ export VAULT_PATH="$(git rev-parse --show-toplevel)"   # e.g. this repo
 #    Open the repo in Claude Code and the 23 tools load automatically.
 ```
 
+**Then try it on the demo corpus** (about five minutes): open the repo in Claude Code and ask for a retrieval — e.g. `vault_retrieve("how should tool calls handle retries safely")` — and you'll get ranked notes with scores and a `retrievalId`. Run `/health` and you'll see the knowledge-health readout computed over the corpus: `K=59 (53 content) | sigma=1.0 | COMPOUNDING`, with escape velocity true. Run `/connect` to watch it generate cross-domain synthesis notes into `30-resources/synthesis/` — that folder ships empty on purpose.
+
 The server runs **filesystem-first** — no external services required. To enable live two-way sync with Obsidian, install the [Local REST API](https://github.com/coddingtonbear/obsidian-local-rest-api) plugin and set `OBSIDIAN_API_KEY` (or store it in the OS keyring under service `engram`). To enable the semantic embedding backend:
 
 ```bash
@@ -249,15 +253,15 @@ engram/
 │   └── scripts/       standalone vault utilities
 ├── docs/              the documentation website (bespoke static site → GitHub Pages)
 ├── .github/workflows/ CI (ruff + pytest) and Pages deploy
-├── 00-inbox/ … 50-maps/   the PARA knowledge vault (empty scaffold here)
-├── memory/            project memory, glossary, contacts (empty scaffold)
+├── 00-inbox/ … 50-maps/   the PARA knowledge vault (seeded demo corpus)
+├── memory/            project memory, glossary (seeded demo corpus)
 ├── .mcp.json          MCP server registration
 ├── CLAUDE.md          operating instructions for the agent
 ├── STRUCTURE.md       the vault layout + customization layers, explained
 └── EXAMPLES.md        end-to-end session walkthroughs
 ```
 
-This repository is the **foundation scaffold** — the engine and the customization layers, with the PARA folders empty. Point engram at a vault that has real notes and the retrieval, feedback, and health loops come alive.
+This repository is the **engine plus a seeded demonstration vault** — the PARA folders carry the 53-note demo corpus (every file labeled `seed: demo`) so all the loops are live out of the box. To make it yours: point `VAULT_PATH` at your own vault, or write over the top of this one and delete the seeded files whenever you like — the engine does not depend on them.
 
 ## Skill evaluation
 

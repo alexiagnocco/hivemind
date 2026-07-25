@@ -151,7 +151,7 @@ def build_manifest() -> dict:
     for md_file in md_files:
         rel = md_file.relative_to(vault)
         parts = rel.parts
-        if any(p in EXCLUDE_DIRS for p in parts):
+        if any(p in EXCLUDE_DIRS or p.startswith(".") for p in parts):
             continue
 
         try:

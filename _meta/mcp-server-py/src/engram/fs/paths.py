@@ -6,7 +6,7 @@ _META_TOPLEVEL_RE = re.compile(r"^_meta/[^/]+\.(md|json|jsonl)$")
 
 
 def is_system_note(path: str) -> bool:
-    """Verbatim port of helpers.ts isSystemNote (lines 300-319)."""
+    """Port of helpers.ts isSystemNote (lines 300-319), extended with root repo docs."""
     if path.startswith("40-archive/"):
         return True
     if path.startswith("_templates/"):
@@ -29,4 +29,12 @@ def is_system_note(path: str) -> bool:
         return True
     if path.endswith("/_README.md") or path == "_README.md":
         return True
-    return path in ("CLAUDE.md", "EXAMPLES.md", "memory/MEMORY.md")
+    return path in (
+        "CLAUDE.md",
+        "EXAMPLES.md",
+        "README.md",
+        "CREDITS.md",
+        "STRUCTURE.md",
+        "LICENSE.md",
+        "memory/MEMORY.md",
+    )

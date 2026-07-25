@@ -16,8 +16,10 @@ vault/
 │   ├── code-review/
 │   └── on-call/
 ├── 30-resources/       # Reference material, guides, how-tos
-│   ├── backend/
-│   ├── ai-ml/
+│   ├── agent-sdk/
+│   ├── mcp-gateway/
+│   ├── evals-observability/
+│   ├── reliability-guardrails/
 │   └── synthesis/      # Cross-domain pattern notes from /connect
 ├── 40-archive/         # Completed/deprecated (status: archived)
 ├── 50-maps/            # Maps of Content (MOCs) by domain
