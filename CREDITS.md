@@ -53,4 +53,4 @@ Handbook*, and Meadows (2008) *Thinking in Systems*. See its bibliography for th
 
 AgentOps is licensed Apache-2.0. Because hivemind includes **none of its code**, this file is an
 acknowledgement of intellectual inspiration rather than a code-license (NOTICE) obligation. hivemind
-itself is released under the [MIT License](LICENSE).
+itself is released under the [PolyForm Noncommercial License 1.0.0](LICENSE).
