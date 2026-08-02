@@ -85,6 +85,60 @@ export HIVEMIND_EMBEDDINGS_MODEL_DIR=$PWD/models/all-MiniLM-L6-v2
 
 Model weights are provisioned on demand and never committed.
 
+## Docker
+
+A container image is the zero-install path for anyone who doesn't want uv on
+their machine. The hive is mounted at runtime and never baked into the image.
+
+```bash
+docker build -t hivemind:latest .                                  # base (~200 MB)
+docker build -t hivemind:embeddings --target runtime-embeddings .  # + ONNX (~600 MB)
+```
+
+Wire it into `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "hivemind": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-v", "/absolute/path/to/hive:/hive",
+        "ghcr.io/<owner>/hivemind:latest"
+      ]
+    }
+  }
+}
+```
+
+- **`-i` is mandatory.** An MCP stdio server sees immediate stdin EOF without it
+  and shuts down before the handshake completes.
+- **Pass `--user "$(id -u):$(id -g)"`** so notes the server writes keep your
+  ownership rather than the container's uid 1000.
+- **Model weights are not in the image.** Run `python scripts/fetch-embedding-model.py`
+  and mount the result at `/models/all-MiniLM-L6-v2`; without it the `auto`
+  backend degrades to the hashing embedding and `hive_status` says so.
+- **`OBSIDIAN_FALLBACK_MODE=fs_only` is the default here.** The Obsidian REST
+  plugin listens on the *host's* 127.0.0.1, which is not the container's.
+
+> **Keyring does not work in a container.** `scripts/launch.sh` falls back to
+> `keyring.get_password("hivemind", "obsidian-rest")` when `OBSIDIAN_API_KEY` is
+> unset. There is no D-Bus secret service in the image, so that lookup yields
+> nothing and the server starts with an empty key. Pass `OBSIDIAN_API_KEY`
+> explicitly (`-e OBSIDIAN_API_KEY=…`) if you need REST mode.
+
+Smoke-test a built image:
+
+```bash
+docker run -i --rm -e HIVE_PATH=/hive -e HIVEMIND_SMOKE_CMD='python -m hivemind' \
+  -v "$PWD/../..:/hive:ro" --entrypoint python \
+  hivemind:latest /app/scripts/stdio-smoke.py --handshake-only
+```
+
+`docker-compose.yml` wraps the build and that smoke run; `.github/workflows/publish-image.yml`
+builds, smoke-tests, and pushes to GHCR on a `v*` tag.
+
 ## Development
 
 ```bash
@@ -92,6 +146,10 @@ uv run ruff check src tests     # lint
 uv run mypy                     # strict type check
 uv run pytest -q                # tests
 ```
+
+`scripts/stdio-smoke.py` boots the server through `launch.sh` by default; set
+`HIVEMIND_SMOKE_CMD` to point it at any other server command (the container image
+has no launcher).
 
 Tests live in `tests/`. The ONNX backend test runs against a tiny committed
 fixture (`tests/fixtures/tiny-onnx/`) and skips when the `embeddings` extra is

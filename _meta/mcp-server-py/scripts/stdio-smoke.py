@@ -22,7 +22,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import queue
+import shlex
 import subprocess
 import sys
 import threading
@@ -30,6 +32,22 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 LAUNCH = SCRIPT_DIR / "launch.sh"
+
+
+def _server_cmd() -> list[str]:
+    """Command that boots the server under test.
+
+    Defaults to ``bash launch.sh`` so the wrapper's env resolution is exercised,
+    which is what .mcp.json actually runs. HIVEMIND_SMOKE_CMD overrides it for
+    environments that have no launcher — notably inside the container image,
+    where there is no uv and the venv is already on PATH:
+
+        HIVEMIND_SMOKE_CMD='python -m hivemind' python scripts/stdio-smoke.py
+    """
+    override = os.environ.get("HIVEMIND_SMOKE_CMD", "").strip()
+    if override:
+        return shlex.split(override)
+    return ["bash", str(LAUNCH)]
 
 
 def _fail(step: str, reason: str, hint: str, stderr_tail: list[str]) -> None:
@@ -61,7 +79,7 @@ def main() -> int:
     args = parser.parse_args()
 
     proc = subprocess.Popen(
-        ["bash", str(LAUNCH)],
+        _server_cmd(),
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,

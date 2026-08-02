@@ -1,0 +1,25 @@
+# Build context is _meta/mcp-server-py. Keep the image to source + lockfile.
+
+# Embedding weights are provisioned by scripts/fetch-embedding-model.py and are
+# never committed — they must stay out of the image so it is redistributable.
+models/
+
+# Local environments and caches
+.venv/
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Tests and dev-only material — not needed at runtime. stdio-smoke.py is
+# COPYed explicitly by the Dockerfile.
+tests/
+
+# Local config that must never be baked in
+.env
+.env.*
+
+.git/
+.DS_Store

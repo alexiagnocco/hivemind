@@ -1,0 +1,58 @@
+# hivemind MCP server — build/test convenience.
+#
+# An MCP stdio server is not a long-running network service, so this file is a
+# build + smoke-test harness, not a "docker compose up" deployment.
+#
+#   docker compose build hivemind
+#   docker compose run --rm smoke
+#
+# For real use, wire the image into .mcp.json (see the README's Docker section).
+
+services:
+  hivemind:
+    build:
+      context: .
+      target: runtime
+    image: hivemind:latest
+    # stdin_open is required: an MCP stdio server sees EOF and exits without it.
+    stdin_open: true
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HIVE_PATH: /hive
+      OBSIDIAN_FALLBACK_MODE: fs_only
+    volumes:
+      # The repo root is the hive — three levels up from _meta/mcp-server-py.
+      - ../../:/hive
+
+  hivemind-embeddings:
+    build:
+      context: .
+      target: runtime-embeddings
+    image: hivemind:embeddings
+    stdin_open: true
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HIVE_PATH: /hive
+      OBSIDIAN_FALLBACK_MODE: fs_only
+      HIVEMIND_EMBEDDINGS_BACKEND: onnx
+      HIVEMIND_EMBEDDINGS_MODEL_DIR: /models/all-MiniLM-L6-v2
+    volumes:
+      - ../../:/hive
+      # Provision first: python scripts/fetch-embedding-model.py
+      - ./models/all-MiniLM-L6-v2:/models/all-MiniLM-L6-v2:ro
+
+  # Drives a real JSON-RPC session against the built image over stdio.
+  smoke:
+    image: hivemind:latest
+    depends_on:
+      - hivemind
+    stdin_open: true
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HIVE_PATH: /hive
+      OBSIDIAN_FALLBACK_MODE: fs_only
+      # There is no launch.sh (and no uv) in the image; the venv is on PATH.
+      HIVEMIND_SMOKE_CMD: python -m hivemind
+    volumes:
+      - ../../:/hive
+    entrypoint: ["python", "/app/scripts/stdio-smoke.py", "--handshake-only"]
